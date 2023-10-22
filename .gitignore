@@ -34,3 +34,5 @@ node_modules/
 .fake
 
 Migrations/
+
+.DS_Store

@@ -1,6 +1,7 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+using OpenSkinsApi.Infrastructure.Http;
 
-app.MapGet("/", () => "Hello World!");
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-app.Run();
+
+Server server = new(builder);
+await server.RunAsync();
