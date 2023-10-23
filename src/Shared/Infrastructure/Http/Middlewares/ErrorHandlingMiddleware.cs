@@ -1,4 +1,4 @@
-namespace OpenSkinsApi.Shared.Infrastructure.Http.Middlewares
+namespace OpenSkinsApi.Infrastructure.Http.Middlewares
 {
     using System.Linq;
     using System.Net;
