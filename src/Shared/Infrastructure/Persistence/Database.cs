@@ -6,6 +6,7 @@ namespace OpenSkinsApi.Infrastructure.Persistence
     public class Database : DbContext
     {
         public DbSet<Skin> RefreshToken { get; set; }
+        public DbSet<User> User { get; set; }
         public Database(DbContextOptions<Database> options) : base(options)
         {
         }
