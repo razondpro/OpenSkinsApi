@@ -6,6 +6,12 @@ namespace OpenSkinsApi.Modules.Skins.Domain.Entities
     public class User : Entity
     {
         public Email Email { get; private set; }
+
+        // EF Constructor
+        private User() : base(null)
+        {
+            Email = null!;
+        }
         private User(UniqueIdentity? id, Email email) : base(id)
         {
             Email = email;

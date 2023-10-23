@@ -10,7 +10,15 @@ namespace OpenSkinsApi.Modules.Skins.Domain.Entities
         public Color Color { get; private set; }
         public Money Price { get; private set; }
         public bool IsAvailable { get; private set; }
+        private readonly List<User> _users = new();
+        public IReadOnlyList<User> Users => _users.ToList().AsReadOnly();
 
+        //EF Constructor
+        private Skin() : base(null)
+        {
+            Name = null!;
+            Price = null!;
+        }
         private Skin(UniqueIdentity? id, Name name, Money price, Type type, Color color) : base(id)
         {
             Name = name;
@@ -37,5 +45,14 @@ namespace OpenSkinsApi.Modules.Skins.Domain.Entities
             IsAvailable = false;
         }
 
+        public void MakeItAvailable()
+        {
+            IsAvailable = true;
+        }
+
+        public void SellTo(User user)
+        {
+            _users.Add(user);
+        }
     }
 }
