@@ -35,10 +35,10 @@ namespace OpenSkinsApi.Config.Swagger
 
         private static OpenApiInfo CreateInfoForApiVersion(ApiVersionDescription description)
         {
-            var text = new StringBuilder("An API to test DDD architecture with Kafka. ");
+            var text = new StringBuilder("An API to manage Open Skins. ");
             var info = new OpenApiInfo()
             {
-                Title = "DDD API",
+                Title = "Open Skins API",
                 Version = description.ApiVersion.ToString(),
                 Contact = new OpenApiContact() { Name = "Razon Miah", Email = "miahrazon@gmail.com" },
                 License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
