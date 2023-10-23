@@ -1,4 +1,5 @@
 using OpenSkinsApi.Infrastructure.Persistence.Core.Interceptors;
+using OpenSkinsApi.Infrastructure.Persistence.Core.UnitOfWork;
 
 namespace OpenSkinsApi.Config.Database
 {
@@ -8,6 +9,7 @@ namespace OpenSkinsApi.Config.Database
         {
             services.AddDatabase();
             services.AddSingleton<UpdateAuditableEntitiesInterceptor>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
     }
 }
