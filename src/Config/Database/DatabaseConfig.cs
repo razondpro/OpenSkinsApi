@@ -4,6 +4,7 @@ namespace OpenSkinsApi.Config.Database
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
     using OpenSkinsApi.Infrastructure.Persistence;
+    using OpenSkinsApi.Infrastructure.Persistence.Core.Interceptors;
 
     public static class DatabaseConfig
     {
@@ -26,6 +27,9 @@ namespace OpenSkinsApi.Config.Database
 
                 options.EnableDetailedErrors(databaseOptions.EnableDetailedErrors);
                 options.EnableSensitiveDataLogging(databaseOptions.EnableSensitiveDataLogging);
+
+                var updateAuditableEntitiesInterceptor = provider.GetRequiredService<UpdateAuditableEntitiesInterceptor>();
+                options.AddInterceptors(updateAuditableEntitiesInterceptor);
 
             });
 
