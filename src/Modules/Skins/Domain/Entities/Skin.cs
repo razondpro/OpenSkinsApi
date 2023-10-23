@@ -3,7 +3,7 @@ namespace OpenSkinsApi.Modules.Skins.Domain.Entities
     using OpenSkinsApi.Domain;
     using OpenSkinsApi.Modules.Skins.Domain.Enums;
     using OpenSkinsApi.Modules.Skins.Domain.ValueObjects;
-    public class Skin : AggregateRoot
+    public class Skin : AggregateRoot, IAuditableEntity
     {
         public Name Name { get; private set; }
         public Type Type { get; private set; }
@@ -12,6 +12,8 @@ namespace OpenSkinsApi.Modules.Skins.Domain.Entities
         public bool IsAvailable { get; private set; }
         private readonly List<User> _users = new();
         public IReadOnlyList<User> Users => _users.ToList().AsReadOnly();
+        public DateTime CreatedOn { get; set; }
+        public DateTime? LastModifiedOn { get; set; }
 
         //EF Constructor
         private Skin() : base(null)
