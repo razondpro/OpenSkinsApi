@@ -1,6 +1,5 @@
-using AuthService.Shared.Infrastructure.Http.Middlewares;
+using OpenSkinsApi.Infrastructure.Http.Middlewares;
 using OpenSkinsApi.Infrastructure.Http.Api;
-using OpenSkinsApi.Shared.Infrastructure.Http.Middlewares;
 
 namespace OpenSkinsApi.Infrastructure.Http
 {
