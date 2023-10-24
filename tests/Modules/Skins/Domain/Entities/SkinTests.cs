@@ -20,7 +20,7 @@ namespace OpenSkinsApi.Tests.Modules.Skins.Domain.Entities
             skin.Price.Should().Be(price);
             skin.Type.Should().Be(type);
             skin.Color.Should().Be(color);
-            skin.IsAvailable.Should().BeTrue();
+            skin.IsAvailable.Should().BeFalse();
         }
 
 
@@ -33,6 +33,17 @@ namespace OpenSkinsApi.Tests.Modules.Skins.Domain.Entities
             skin.MakeItUnavailable();
 
             skin.IsAvailable.Should().BeFalse();
+        }
+
+        [Theory]
+        [ClassData(typeof(ExisitingSkinData))]
+        public void MakeItAvailable_SetsIsAvailableToTrue(UniqueIdentity id, Name name, Money price, Type type, Color color)
+        {
+            var skin = Skin.Create(id, name, price, type, color);
+
+            skin.MakeItAvailable();
+
+            skin.IsAvailable.Should().BeTrue();
         }
     }
 
