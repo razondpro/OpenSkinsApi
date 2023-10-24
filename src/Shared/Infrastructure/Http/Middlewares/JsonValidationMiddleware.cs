@@ -1,4 +1,4 @@
-namespace AuthService.Shared.Infrastructure.Http.Middlewares
+namespace OpenSkinsApi.Infrastructure.Http.Middlewares
 {
     using System.Text.Json;
     using OpenSkinsApi.Infrastructure.Http.Core;
