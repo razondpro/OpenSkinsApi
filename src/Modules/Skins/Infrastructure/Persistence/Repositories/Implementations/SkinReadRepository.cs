@@ -1,0 +1,34 @@
+using Microsoft.EntityFrameworkCore;
+using OpenSkinsApi.Domain;
+using OpenSkinsApi.Infrastructure.Persistence;
+using OpenSkinsApi.Modules.Skins.Domain.Entities;
+using OpenSkinsApi.Modules.Skins.Domain.Repositories;
+
+namespace OpenSkinsApi.Modules.Skins.Infrastructure.Persistence.Repositories.Implementations
+{
+    public class SkinReadRepository : ISkinReadRepository
+    {
+        private readonly Database _context;
+
+        public SkinReadRepository(Database context)
+        {
+            _context = context;
+        }
+
+        public async Task<Skin?> Get(UniqueIdentity id)
+        {
+            return await _context.Skins.FindAsync(id.Value);
+        }
+
+        public async Task<List<Skin>> GetAvailable()
+        {
+            return await _context.Skins.Where(skin => skin.IsAvailable).ToListAsync();
+        }
+
+        public async Task<List<Skin>> GetSkinsOwnedByUser(UniqueIdentity userId)
+        {
+            return await _context.Skins
+                            .Where(skin => skin.Users.Any(user => user.Id.Value == userId.Value)).ToListAsync();
+        }
+    }
+}

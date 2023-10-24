@@ -52,7 +52,7 @@ namespace OpenSkinsApi.Modules.Skins.Domain.Entities
             IsAvailable = true;
         }
 
-        public void SellTo(User user)
+        public void AddOwner(User user)
         {
             _users.Add(user);
         }
