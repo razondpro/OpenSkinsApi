@@ -10,7 +10,6 @@ namespace OpenSkinsApi.Infrastructure.Persistence.Models
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-
             //table name
             builder.ToTable("users");
 
@@ -36,6 +35,12 @@ namespace OpenSkinsApi.Infrastructure.Persistence.Models
                     v => Email.Create(v)
                 );
 
+            builder.Property(user => user.CreatedOn)
+                .HasColumnName("created_on")
+                .IsRequired();
+
+            builder.Property(user => user.LastModifiedOn)
+                .HasColumnName("updated_on");
         }
     }
 }
