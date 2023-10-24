@@ -1,0 +1,145 @@
+[
+    {
+        "Name": "Skin1",
+        "Type": 1,
+        "Color": 3,
+        "Price": {
+            "Amount": 19.99,
+            "Currency": 0
+        },
+        "IsAvailable": true,
+        "Id": "7ccbb5d2-4e49-4ef7-9ecf-24b20a7cbb81",
+        "CreatedOn": "2023-10-15T08:00:00Z",
+        "LastModifiedOn": "2023-10-15T08:00:00Z"
+    },
+    {
+        "Name": "Skin2",
+        "Type": 0,
+        "Color": 1,
+        "Price": {
+            "Amount": 9.99,
+            "Currency": 1
+        },
+        "IsAvailable": true,
+        "Id": "7ccbb5d2-4e49-4ef7-9ecf-24b20a7cbb84",
+        "CreatedOn": "2023-10-14T14:30:00Z",
+        "LastModifiedOn": "2023-10-14T14:30:00Z"
+    },
+    {
+        "Name": "Skin3",
+        "Type": 2,
+        "Color": 5,
+        "Price": {
+            "Amount": 15.99,
+            "Currency": 0
+        },
+        "IsAvailable": true,
+        "Id": "86e0cf1f-7a8e-4e8d-8d9d-16b04787628d",
+        "CreatedOn": "2023-10-13T12:15:00Z",
+        "LastModifiedOn": "2023-10-13T12:15:00Z"
+    },
+    {
+        "Name": "Skin4",
+        "Type": 3,
+        "Color": 6,
+        "Price": {
+            "Amount": 29.99,
+            "Currency": 1
+        },
+        "IsAvailable": true,
+        "Id": "0d6d80d7-067b-4db6-95a5-95a10a34c157",
+        "CreatedOn": "2023-10-12T19:45:00Z",
+        "LastModifiedOn": "2023-10-12T19:45:00Z"
+    },
+    {
+        "Name": "Skin5",
+        "Type": 0,
+        "Color": 2,
+        "Price": {
+            "Amount": 24.99,
+            "Currency": 0
+        },
+        "IsAvailable": true,
+        "Id": "b5b120eb-51b7-439c-87aa-88510a336b89",
+        "CreatedOn": "2023-10-11T08:30:00Z",
+        "LastModifiedOn": "2023-10-11T08:30:00Z"
+    },
+    {
+        "Name": "Skin6",
+        "Type": 1,
+        "Color": 7,
+        "Price": {
+            "Amount": 12.99,
+            "Currency": 0
+        },
+        "IsAvailable": true,
+        "Id": "7a4750ce-e03d-44a1-b24b-d3b32a77129b",
+        "CreatedOn": "2023-10-10T17:20:00Z",
+        "LastModifiedOn": "2023-10-10T17:20:00Z"
+    },
+    {
+        "Name": "Skin7",
+        "Type": 2,
+        "Color": 0,
+        "Price": {
+            "Amount": 17.99,
+            "Currency": 1
+        },
+        "IsAvailable": true,
+        "Id": "4ff115a5-9857-40d7-8336-65d00a11b0bf",
+        "CreatedOn": "2023-10-09T09:40:00Z",
+        "LastModifiedOn": "2023-10-09T09:40:00Z"
+    },
+    {
+        "Name": "Skin8",
+        "Type": 3,
+        "Color": 4,
+        "Price": {
+            "Amount": 14.99,
+            "Currency": 0
+        },
+        "IsAvailable": true,
+        "Id": "3ac30b1f-175e-4d62-bf8a-0c030a17c2b4",
+        "CreatedOn": "2023-10-08T14:25:00Z",
+        "LastModifiedOn": "2023-10-08T14:25:00Z"
+    },
+    {
+        "Name": "Skin9",
+        "Type": 0,
+        "Color": 3,
+        "Price": {
+            "Amount": 22.99,
+            "Currency": 0
+        },
+        "IsAvailable": true,
+        "Id": "d4f845b3-0fb2-4c70-8ee4-49ca2a13b3b8",
+        "CreatedOn": "2023-10-07T12:30:00Z",
+        "LastModifiedOn": "2023-10-07T12:30:00Z"
+    },
+    {
+        "Name": "Skin10",
+        "Type": 1,
+        "Color": 9,
+        "Price": {
+            "Amount": 19.99,
+            "Currency": 1
+        },
+        "IsAvailable": true,
+        "Id": "60f7a591-84fc-4e66-96f5-3eb30a1975b5",
+        "CreatedOn": "2023-10-06T16:50:00Z",
+        "LastModifiedOn": "2023-10-06T16:50:00Z"
+    },
+    {
+        "Name": "Skin11",
+        "Type": 2,
+        "Color": 1,
+        "Price": {
+            "Amount": 24.99,
+            "Currency": 0
+        },
+        "IsAvailable": true,
+        "Id": "9eb0a32d-4de9-45d7-b1d7-38e60a1d20e1",
+        "CreatedOn": "2023-10-05T13:15:00Z",
+        "LastModifiedOn": "2023-10-05T13:15:00Z"
+    }
+]

@@ -42,7 +42,7 @@ namespace OpenSkinsApi.Tests.Modules.Skins.Domain.Entities
         {
 
             var name = Name.Create("John Doe");
-            var price = Money.Create(20.0m, Currency.USD);
+            var price = Money.Create(20.0m);
             var type = Type.Normal;
             var color = Color.Black;
             var id = new UniqueIdentity(null);

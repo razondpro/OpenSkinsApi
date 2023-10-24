@@ -3,6 +3,7 @@ namespace OpenSkinsApi.Infrastructure.Persistence.Models
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using OpenSkinsApi.Domain;
+    using OpenSkinsApi.Infrastructure.Persistence.Seed;
     using OpenSkinsApi.Modules.Skins.Domain.Entities;
     using OpenSkinsApi.Modules.Skins.Domain.Enums;
     using OpenSkinsApi.Modules.Skins.Domain.ValueObjects;
@@ -18,7 +19,6 @@ namespace OpenSkinsApi.Infrastructure.Persistence.Models
             builder.HasKey(s => s.Id);
 
             //properties
-
             builder.Property(s => s.Id)
                 .HasColumnName("id")
                 .HasConversion(id => id.Value,
@@ -33,20 +33,13 @@ namespace OpenSkinsApi.Infrastructure.Persistence.Models
                     v => Name.Create(v)
                 );
 
-            builder.OwnsOne(s => s.Price, p =>
-            {
-                p.Property(m => m.Amount)
-                    .HasColumnName("price")
-                    .IsRequired();
-
-                p.Property(m => m.Currency)
-                    .HasColumnName("currency")
-                    .IsRequired()
-                    .HasConversion(
-                    v => v.ToString(),
-                    v => (Currency)Enum.Parse(typeof(Currency), v)
+            builder.Property(s => s.Price)
+                .HasColumnName("price")
+                .IsRequired()
+                .HasConversion(
+                    v => v.Amount,
+                    v => Money.Create(v)
                 );
-            });
 
             builder.Property(s => s.Type)
                 .HasColumnName("type")
@@ -68,11 +61,23 @@ namespace OpenSkinsApi.Infrastructure.Persistence.Models
                 .HasColumnName("is_available")
                 .IsRequired();
 
+            builder.Property(s => s.CreatedOn)
+                .HasColumnName("created_on")
+                .IsRequired();
+
+            builder.Property(s => s.LastModifiedOn)
+                .HasColumnName("last_modified_on");
+
 
             //relationships
+            //we only map one side of the relationship because we don't want to navigate from the other side
+            //aggregate root Skin should be the only way to access other entities
             builder.HasMany(e => e.Users)
                 .WithMany()
                 .UsingEntity(etb => etb.ToTable("user_skins"));
+
+            //seed data
+            builder.HasData(Seeder.LoadSkinsFromJsonFile());
 
         }
     }
