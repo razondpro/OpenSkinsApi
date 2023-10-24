@@ -7,28 +7,24 @@ namespace OpenSkinsApi.Modules.Skins.Domain.ValueObjects
     public class Money : ValueObject
     {
         public decimal Amount { get; }
-        public Currency Currency { get; }
-
-        private Money(decimal amount, Currency currency)
+        private Money(decimal amount)
         {
             Amount = amount;
-            Currency = currency;
         }
 
-        public static Money Create(decimal amount, Currency currency)
+        public static Money Create(decimal amount)
         {
             if (amount < 0)
             {
                 throw new InvalidMoneyAmountException("Amount cannot be negative.");
             }
 
-            return new Money(amount, currency);
+            return new Money(amount);
         }
 
         protected override IEnumerable<object> GetAtomicValues()
         {
             yield return Amount;
-            yield return Currency;
         }
     }
 }
