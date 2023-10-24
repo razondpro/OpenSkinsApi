@@ -1,6 +1,7 @@
 namespace OpenSkinsApi.Infrastructure.Http.Api
 {
     using Asp.Versioning.Builder;
+    using OpenSkinsApi.Modules.Skins.Infrastructure.Http.Routes;
 
     public static class ApiBuilder
     {
@@ -11,6 +12,7 @@ namespace OpenSkinsApi.Infrastructure.Http.Api
 
             //skins routes v1
             var skinsV1 = apiV1.MapGroup("/skins/");
+            SkinsRouteExtensions.MapSkinsRoutes(skinsV1).WithTags("Skins");
 
             return application;
         }
