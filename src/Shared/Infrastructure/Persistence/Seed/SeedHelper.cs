@@ -22,7 +22,7 @@ namespace OpenSkinsApi.Infrastructure.Persistence.Seed
                 data?.ForEach(skin =>
                 {
                     var s = Skin.Create(
-                        new UniqueIdentity(skin.Id),
+                        null,
                         Name.Create(skin.Name),
                         Money.Create(skin.Price),
                         (Type)skin.Type,
@@ -33,6 +33,8 @@ namespace OpenSkinsApi.Infrastructure.Persistence.Seed
                         s.MakeItAvailable();
                     else
                         s.MakeItUnavailable();
+
+                    s.CreatedOn = DateTime.UtcNow;
 
                     skins.Add(s);
 
@@ -45,16 +47,25 @@ namespace OpenSkinsApi.Infrastructure.Persistence.Seed
 
             return skins;
         }
+
+        public static List<User> LoadUsers()
+        {
+            var user = User.Create(
+                null,
+                Email.Create("johndoe@example.com")
+            );
+
+            user.CreatedOn = DateTime.UtcNow;
+
+            return new List<User> { user };
+        }
     }
 
     internal record SkinData(
-        Guid Id,
         string Name,
         int Type,
         int Color,
         decimal Price,
-        bool IsAvailable,
-        DateTime CreatedOn,
-        DateTime? LastModifiedOn
+        bool IsAvailable
     );
 }

@@ -68,14 +68,6 @@ namespace OpenSkinsApi.Infrastructure.Persistence.Models
             builder.Property(s => s.LastModifiedOn)
                 .HasColumnName("last_modified_on");
 
-
-            //relationships
-            //we only map one side of the relationship because we don't want to navigate from the other side
-            //aggregate root Skin should be the only way to access other entities
-            builder.HasMany(e => e.Users)
-                .WithMany()
-                .UsingEntity(etb => etb.ToTable("user_skins"));
-
             //seed data
             builder.HasData(SeedHelper.LoadSkinsFromJsonFile());
 
