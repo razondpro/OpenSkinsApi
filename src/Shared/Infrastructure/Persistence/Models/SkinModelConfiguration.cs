@@ -77,7 +77,7 @@ namespace OpenSkinsApi.Infrastructure.Persistence.Models
                 .UsingEntity(etb => etb.ToTable("user_skins"));
 
             //seed data
-            builder.HasData(Seeder.LoadSkinsFromJsonFile());
+            builder.HasData(SeedHelper.LoadSkinsFromJsonFile());
 
         }
     }

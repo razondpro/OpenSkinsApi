@@ -6,7 +6,7 @@ namespace OpenSkinsApi.Infrastructure.Persistence.Seed
     using OpenSkinsApi.Modules.Skins.Domain.Enums;
     using OpenSkinsApi.Modules.Skins.Domain.ValueObjects;
 
-    public static class Seeder
+    public static class SeedHelper
     {
         public static List<Skin> LoadSkinsFromJsonFile()
         {
