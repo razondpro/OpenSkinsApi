@@ -24,7 +24,7 @@ namespace OpenSkinsApi.Infrastructure.Persistence.Seed
                     var s = Skin.Create(
                         new UniqueIdentity(skin.Id),
                         Name.Create(skin.Name),
-                        Money.Create(skin.Price.Amount),
+                        Money.Create(skin.Price),
                         (Type)skin.Type,
                         (Color)skin.Color
                     );
@@ -52,14 +52,9 @@ namespace OpenSkinsApi.Infrastructure.Persistence.Seed
         string Name,
         int Type,
         int Color,
-        Price Price,
+        decimal Price,
         bool IsAvailable,
         DateTime CreatedOn,
         DateTime? LastModifiedOn
-    );
-
-    internal record Price(
-        decimal Amount,
-        int Currency
     );
 }
