@@ -21,15 +21,21 @@ namespace OpenSkinsApi.Infrastructure.Persistence.Seed
                 //JsonConvert supports only primitive types, so we need to convert them manually because of ValueObjectss
                 data?.ForEach(skin =>
                 {
-                    skins.Add(
-                        Skin.Create(
-                            new UniqueIdentity(skin.Id),
-                            Name.Create(skin.Name),
-                            Money.Create(skin.Price.Amount),
-                            (Type)skin.Type,
-                            (Color)skin.Color
-                        )
+                    var s = Skin.Create(
+                        new UniqueIdentity(skin.Id),
+                        Name.Create(skin.Name),
+                        Money.Create(skin.Price.Amount),
+                        (Type)skin.Type,
+                        (Color)skin.Color
                     );
+
+                    if (skin.IsAvailable)
+                        s.MakeItAvailable();
+                    else
+                        s.MakeItUnavailable();
+
+                    skins.Add(s);
+
                 });
             }
             catch (Exception e)

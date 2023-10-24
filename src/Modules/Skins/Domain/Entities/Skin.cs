@@ -27,7 +27,6 @@ namespace OpenSkinsApi.Modules.Skins.Domain.Entities
             Price = price;
             Type = type;
             Color = color;
-            IsAvailable = true;
         }
 
         public static Skin Create(UniqueIdentity? id, Name name, Money price, Type type, Color color)

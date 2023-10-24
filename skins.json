@@ -7,7 +7,7 @@
             "Amount": 19.99,
             "Currency": 0
         },
-        "IsAvailable": true,
+        "IsAvailable": false,
         "Id": "7ccbb5d2-4e49-4ef7-9ecf-24b20a7cbb81",
         "CreatedOn": "2023-10-15T08:00:00Z",
         "LastModifiedOn": "2023-10-15T08:00:00Z"
@@ -72,7 +72,7 @@
             "Amount": 12.99,
             "Currency": 0
         },
-        "IsAvailable": true,
+        "IsAvailable": false,
         "Id": "7a4750ce-e03d-44a1-b24b-d3b32a77129b",
         "CreatedOn": "2023-10-10T17:20:00Z",
         "LastModifiedOn": "2023-10-10T17:20:00Z"
@@ -111,7 +111,7 @@
             "Amount": 22.99,
             "Currency": 0
         },
-        "IsAvailable": true,
+        "IsAvailable": false,
         "Id": "d4f845b3-0fb2-4c70-8ee4-49ca2a13b3b8",
         "CreatedOn": "2023-10-07T12:30:00Z",
         "LastModifiedOn": "2023-10-07T12:30:00Z"
@@ -137,7 +137,7 @@
             "Amount": 24.99,
             "Currency": 0
         },
-        "IsAvailable": true,
+        "IsAvailable": false,
         "Id": "9eb0a32d-4de9-45d7-b1d7-38e60a1d20e1",
         "CreatedOn": "2023-10-05T13:15:00Z",
         "LastModifiedOn": "2023-10-05T13:15:00Z"
