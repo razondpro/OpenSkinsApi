@@ -20,7 +20,16 @@ namespace OpenSkinsApi.Modules.Skins.Infrastructure.Persistence.Repositories.Imp
             return await _database.Purchases
                 .Include(p => p.Owner)
                 .Include(p => p.Skin)
-                .FirstOrDefaultAsync(p => p.Id == purchaseId);
+                .FirstOrDefaultAsync(p => p.Id == purchaseId && !p.DeletedAt.HasValue);
+        }
+
+        public async Task<IReadOnlyList<Purchase>> GetByOwner(UniqueIdentity ownerId)
+        {
+            return await _database.Purchases
+                .Include(p => p.Skin)
+                .Where(p => p.Owner.Id == ownerId && !p.DeletedAt.HasValue)
+                .AsNoTracking()
+                .ToListAsync();
         }
     }
 }

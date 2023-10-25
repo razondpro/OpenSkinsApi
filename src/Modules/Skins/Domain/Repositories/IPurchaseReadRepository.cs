@@ -6,5 +6,6 @@ namespace OpenSkinsApi.Modules.Skins.Domain.Repositories
     public interface IPurchaseReadRepository
     {
         Task<Purchase?> Get(UniqueIdentity purchaseId);
+        Task<IReadOnlyList<Purchase>> GetByOwner(UniqueIdentity ownerId);
     }
 }

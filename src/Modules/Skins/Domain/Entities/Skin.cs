@@ -49,9 +49,5 @@ namespace OpenSkinsApi.Modules.Skins.Domain.Entities
             _purchases.Add(Purchase.Create(owner, this));
         }
 
-        public void DeletePurchase(Purchase purchase)
-        {
-            _purchases.Remove(purchase);
-        }
     }
 }
