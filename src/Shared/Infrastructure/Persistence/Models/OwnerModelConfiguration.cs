@@ -7,12 +7,12 @@ using OpenSkinsApi.Modules.Skins.Domain.ValueObjects;
 
 namespace OpenSkinsApi.Infrastructure.Persistence.Models
 {
-    public class UserModelConfiguration : IEntityTypeConfiguration<User>
+    public class OwnerModelConfiguration : IEntityTypeConfiguration<Owner>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<Owner> builder)
         {
             //table name
-            builder.ToTable("users");
+            builder.ToTable("owners");
 
             //primary key
             builder.HasKey(u => u.Id);
@@ -22,12 +22,12 @@ namespace OpenSkinsApi.Infrastructure.Persistence.Models
                 .IsUnique();
 
             //properties
-            builder.Property(user => user.Id)
+            builder.Property(owner => owner.Id)
                 .HasColumnName("id")
                 .HasConversion(id => id.Value,
                 value => new UniqueIdentity(value));
 
-            builder.Property(user => user.Email)
+            builder.Property(owner => owner.Email)
                 .HasMaxLength(Email.MaxLength)
                 .HasColumnName("email")
                 .IsRequired()
@@ -36,15 +36,15 @@ namespace OpenSkinsApi.Infrastructure.Persistence.Models
                     v => Email.Create(v)
                 );
 
-            builder.Property(user => user.CreatedOn)
+            builder.Property(owner => owner.CreatedOn)
                 .HasColumnName("created_on")
                 .IsRequired();
 
-            builder.Property(user => user.LastModifiedOn)
+            builder.Property(owner => owner.LastModifiedOn)
                 .HasColumnName("last_modified_on");
 
             //seed data
-            builder.HasData(SeedHelper.LoadUsers());
+            builder.HasData(SeedHelper.LoadOwners());
         }
     }
 }

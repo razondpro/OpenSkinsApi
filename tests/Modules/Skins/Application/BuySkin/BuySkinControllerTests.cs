@@ -38,11 +38,11 @@ namespace OpenSkinsApi.Tests.Modules.Skins.Application.BuySkin
 
 
         [Fact]
-        public async Task Execute_WhenUserNotFound_ReturnsBadRequestWithUserNotFoundError()
+        public async Task Execute_WhenOwnerNotFound_ReturnsBadRequestWithOwnerNotFoundError()
         {
             // Arrange
             var request = new BuySkinRequestDto("test@example.com", Guid.NewGuid().ToString());
-            _mediatorMock.Setup(x => x.Send(It.IsAny<BuySkinCommand>(), default)).ReturnsAsync(new UserNotFoundError());
+            _mediatorMock.Setup(x => x.Send(It.IsAny<BuySkinCommand>(), default)).ReturnsAsync(new OwnerNotFoundError());
 
             // Act
             var result = await _controller.Execute(request);
@@ -53,7 +53,7 @@ namespace OpenSkinsApi.Tests.Modules.Skins.Application.BuySkin
                 .Result.Should().BeEquivalentTo(TypedResults.BadRequest(new ApiHttpErrorResponse(
                     title: "Bad Request",
                     status: StatusCodes.Status400BadRequest,
-                    errors: new List<ErrorDetail> { new("Email", "User not found") }
+                    errors: new List<ErrorDetail> { new("Email", "Owner not found") }
                 )));
         }
 

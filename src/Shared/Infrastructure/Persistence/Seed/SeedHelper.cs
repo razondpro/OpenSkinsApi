@@ -47,16 +47,16 @@ namespace OpenSkinsApi.Infrastructure.Persistence.Seed
             return skins;
         }
 
-        public static List<User> LoadUsers()
+        public static List<Owner> LoadOwners()
         {
-            var user = User.Create(
+            var owner = Owner.Create(
                 null,
-                Email.Create("johndoe@example.com")
+                Email.Create("  ")
             );
 
-            user.CreatedOn = DateTime.UtcNow;
+            owner.CreatedOn = DateTime.UtcNow;
 
-            return new List<User> { user };
+            return new List<Owner> { owner };
         }
     }
 

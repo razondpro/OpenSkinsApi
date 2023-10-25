@@ -12,7 +12,7 @@ namespace OpenSkinsApi.Modules.Skins.Infrastructure.Persistence.Configurations
             // Table name
             builder.ToTable("skin_owners");
             // Primary key
-            builder.HasKey(us => new { us.Id, us.UserId, us.SkinId });
+            builder.HasKey(us => new { us.Id, us.OwnerId, us.SkinId });
 
             // Properties
             builder.Property(us => us.Id)
@@ -22,9 +22,9 @@ namespace OpenSkinsApi.Modules.Skins.Infrastructure.Persistence.Configurations
                     id => id.Value,
                     value => new UniqueIdentity(value));
 
-            builder.Property(us => us.UserId)
+            builder.Property(us => us.OwnerId)
                 .IsRequired()
-                .HasColumnName("user_id")
+                .HasColumnName("owner_id")
                 .HasConversion(
                     id => id.Value,
                     value => new UniqueIdentity(value));
@@ -47,10 +47,13 @@ namespace OpenSkinsApi.Modules.Skins.Infrastructure.Persistence.Configurations
                 .IsRequired()
                 .HasColumnName("color");
 
+            builder.Property(us => us.DeletedAt)
+                .HasColumnName("deleted_at");
+
             // Relationships
-            builder.HasOne(us => us.User)
+            builder.HasOne(us => us.Owner)
                 .WithMany()
-                .HasForeignKey(us => us.UserId)
+                .HasForeignKey(us => us.OwnerId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(us => us.Skin)

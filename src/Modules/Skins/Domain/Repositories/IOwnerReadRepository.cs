@@ -3,8 +3,8 @@ using OpenSkinsApi.Modules.Skins.Domain.ValueObjects;
 
 namespace OpenSkinsApi.Modules.Skins.Domain.Repositories
 {
-    public interface IUserReadRepository
+    public interface IOwnerReadRepository
     {
-        Task<User?> FindByEmail(Email email);
+        Task<Owner?> FindByEmail(Email email);
     }
 }

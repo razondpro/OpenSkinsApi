@@ -2,10 +2,10 @@ using OpenSkinsApi.Application.Exceptions;
 
 namespace OpenSkinsApi.Modules.Skins.Application.BuySkin
 {
-    public class UserNotFoundError : ApplicationError
+    public class OwnerNotFoundError : ApplicationError
     {
-        private const string DefaultMessage = "User not found";
-        public UserNotFoundError() : base(DefaultMessage)
+        private const string DefaultMessage = "Owner not found";
+        public OwnerNotFoundError() : base(DefaultMessage)
         {
         }
     }

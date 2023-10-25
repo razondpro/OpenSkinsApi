@@ -6,18 +6,18 @@ using OpenSkinsApi.Modules.Skins.Domain.ValueObjects;
 
 namespace OpenSkinsApi.Modules.Skins.Infrastructure.Persistence.Repositories.Implementations
 {
-    public class UserReadRepository : IUserReadRepository
+    public class OwnerReadRepository : IOwnerReadRepository
     {
         private readonly Database _context;
 
-        public UserReadRepository(Database context)
+        public OwnerReadRepository(Database context)
         {
             _context = context;
         }
 
-        public async Task<User?> FindByEmail(Email email)
+        public async Task<Owner?> FindByEmail(Email email)
         {
-            return await _context.Users.FirstOrDefaultAsync(u => ((string)u.Email).Equals(email.Value));
+            return await _context.Owners.FirstOrDefaultAsync(u => ((string)u.Email).Equals(email.Value));
         }
     }
 }

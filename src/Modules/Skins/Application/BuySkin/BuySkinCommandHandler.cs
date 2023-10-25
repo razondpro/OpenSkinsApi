@@ -10,25 +10,25 @@ namespace OpenSkinsApi.Modules.Skins.Application.BuySkin
     {
         private readonly ISkinReadRepository _skinReadRepository;
         private readonly ISkinWriteRepository _skinWriteRepository;
-        private readonly IUserReadRepository _userReadRepository;
+        private readonly IOwnerReadRepository _ownerReadRepository;
 
         public BuySkinCommandHandler(
             ISkinReadRepository skinReadRepository,
             ISkinWriteRepository skinWriteRepository,
-            IUserReadRepository userReadRepository)
+            IOwnerReadRepository ownerReadRepository)
         {
             _skinReadRepository = skinReadRepository;
             _skinWriteRepository = skinWriteRepository;
-            _userReadRepository = userReadRepository;
+            _ownerReadRepository = ownerReadRepository;
         }
         public async Task<Either<Exception, Unit>> Handle(BuySkinCommand request, CancellationToken cancellationToken)
         {
             var email = Email.Create(request.Email);
-            var user = await _userReadRepository.FindByEmail(email);
+            var owner = await _ownerReadRepository.FindByEmail(email);
 
-            if (user is null)
+            if (owner is null)
             {
-                return new UserNotFoundError();
+                return new OwnerNotFoundError();
             }
 
             var guid = Guid.Parse(request.SkinId);
@@ -44,7 +44,7 @@ namespace OpenSkinsApi.Modules.Skins.Application.BuySkin
                 return new SkinNotAvailableError();
             }
 
-            skin.AddOwner(user);
+            skin.AddOwner(owner);
             await _skinWriteRepository.Update(skin);
 
             return Unit.Default;

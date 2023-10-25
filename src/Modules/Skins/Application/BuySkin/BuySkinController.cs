@@ -22,10 +22,10 @@ namespace OpenSkinsApi.Modules.Skins.Application.BuySkin
                 Right: _ => TypedResults.NoContent(),
                 Left: error => error switch
                 {
-                    UserNotFoundError => TypedResults.BadRequest(new ApiHttpErrorResponse(
+                    OwnerNotFoundError => TypedResults.BadRequest(new ApiHttpErrorResponse(
                         title: "Bad Request",
                         status: StatusCodes.Status400BadRequest,
-                        errors: new List<ErrorDetail> { new("Email", "User not found") }
+                        errors: new List<ErrorDetail> { new("Email", "Owner not found") }
                     )),
                     SkinNotFoundError => TypedResults.BadRequest(new ApiHttpErrorResponse(
                         title: "Bad Request",
