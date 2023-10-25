@@ -7,7 +7,7 @@ namespace OpenSkinsApi.Modules.Skins.Application.FindAvailableSkins
     {
         public List<AvailableSkinDto> Skins { get; init; }
 
-        public FindAvailableSkinsResponseDto(List<Skin> skins) : base("Ok", 200)
+        public FindAvailableSkinsResponseDto(List<Skin> skins) : base("Ok", StatusCodes.Status200OK)
         {
             Skins = MapSkinsToReponse(skins);
         }

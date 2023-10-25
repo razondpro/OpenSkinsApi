@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OpenSkinsApi.Domain;
+using OpenSkinsApi.Infrastructure.Persistence.Seed;
 using OpenSkinsApi.Modules.Skins.Domain.Entities;
 using OpenSkinsApi.Modules.Skins.Domain.ValueObjects;
 
@@ -40,7 +41,10 @@ namespace OpenSkinsApi.Infrastructure.Persistence.Models
                 .IsRequired();
 
             builder.Property(user => user.LastModifiedOn)
-                .HasColumnName("updated_on");
+                .HasColumnName("last_modified_on");
+
+            //seed data
+            builder.HasData(SeedHelper.LoadUsers());
         }
     }
 }
