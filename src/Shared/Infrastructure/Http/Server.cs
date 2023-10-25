@@ -17,7 +17,7 @@ namespace OpenSkinsApi.Infrastructure.Http
 
             ConfigureSwagger();
 
-            configureGlobalErrorHandling();
+            ConfigureGlobalErrorHandling();
         }
 
         private void ConfigureMiddlewares()
@@ -31,7 +31,7 @@ namespace OpenSkinsApi.Infrastructure.Http
             }
         }
 
-        private void configureGlobalErrorHandling()
+        private void ConfigureGlobalErrorHandling()
         {
             _app.UseErrorHandlingMiddleware();
         }
