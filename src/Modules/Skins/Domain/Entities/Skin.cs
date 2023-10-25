@@ -10,8 +10,8 @@ namespace OpenSkinsApi.Modules.Skins.Domain.Entities
         public Color Color { get; private set; }
         public Money Price { get; private set; }
         public bool IsAvailable { get; private set; }
-        private readonly List<UserSkin> _userSkins = new();
-        public IReadOnlyList<UserSkin> UserSkins => _userSkins.ToList().AsReadOnly();
+        private readonly List<SkinOwner> _skinOwners = new();
+        public IReadOnlyList<SkinOwner> SkinOwners => _skinOwners.ToList().AsReadOnly();
         public DateTime CreatedOn { get; set; }
         public DateTime? LastModifiedOn { get; set; }
 
@@ -53,7 +53,7 @@ namespace OpenSkinsApi.Modules.Skins.Domain.Entities
 
         public void AddOwner(User user)
         {
-            _userSkins.Add(UserSkin.Create(user, this));
+            _skinOwners.Add(SkinOwner.Create(user, this));
         }
     }
 }

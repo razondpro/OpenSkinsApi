@@ -14,6 +14,7 @@ namespace OpenSkinsApi.Config.Database
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ISkinReadRepository, SkinReadRepository>();
             services.AddScoped<ISkinWriteRepository, SkinWriteRepository>();
+            services.AddScoped<IUserReadRepository, UserReadRepository>();
         }
     }
 }

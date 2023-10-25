@@ -28,7 +28,7 @@ namespace OpenSkinsApi.Modules.Skins.Infrastructure.Persistence.Repositories.Imp
         public async Task<List<Skin>> GetSkinsOwnedByUser(UniqueIdentity userId)
         {
             return await _context.Skins
-                            .Where(skin => skin.UserSkins.Any(us => us.UserId == userId))
+                            .Where(skin => skin.SkinOwners.Any(us => us.UserId == userId))
                             .ToListAsync();
         }
     }
