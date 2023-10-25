@@ -10,14 +10,10 @@ namespace OpenSkinsApi.Modules.Skins.Application.DeletePurchase
         ICommandHandler<DeleteOwnedSkinCommand, Either<Exception, Unit>>
     {
         private readonly IPurchaseReadRepository _purchaseReadRepository;
-        private readonly ISkinWriteRepository _skinWriteRepository;
 
-        public DeleteOwnedSkinCommandHandler(
-            IPurchaseReadRepository purchaseReadRepository,
-            ISkinWriteRepository skinWriteRepository)
+        public DeleteOwnedSkinCommandHandler(IPurchaseReadRepository purchaseReadRepository)
         {
             _purchaseReadRepository = purchaseReadRepository;
-            _skinWriteRepository = skinWriteRepository;
         }
         public async Task<Either<Exception, Unit>> Handle(DeleteOwnedSkinCommand request, CancellationToken cancellationToken)
         {
@@ -31,10 +27,7 @@ namespace OpenSkinsApi.Modules.Skins.Application.DeletePurchase
                 return new SkinNotOwnedError();
             }
 
-            var skin = purchase.Skin;
-            skin.DeletePurchase(purchase);
-
-            await _skinWriteRepository.Update(skin);
+            purchase.SoftDelete();
 
             return Unit.Default;
         }

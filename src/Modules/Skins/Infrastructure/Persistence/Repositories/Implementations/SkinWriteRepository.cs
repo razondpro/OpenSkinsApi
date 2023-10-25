@@ -12,13 +12,6 @@ namespace OpenSkinsApi.Modules.Skins.Infrastructure.Persistence.Repositories.Imp
         {
             _context = context;
         }
-
-        public Task Delete(Skin skin)
-        {
-            _context.Skins.Remove(skin);
-            return Task.CompletedTask;
-        }
-
         public Task Update(Skin skin)
         {
             _context.Skins.Update(skin);
