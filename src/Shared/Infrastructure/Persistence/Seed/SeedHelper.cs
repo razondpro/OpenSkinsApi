@@ -1,7 +1,6 @@
 namespace OpenSkinsApi.Infrastructure.Persistence.Seed
 {
     using Newtonsoft.Json;
-    using OpenSkinsApi.Domain;
     using OpenSkinsApi.Modules.Skins.Domain.Entities;
     using OpenSkinsApi.Modules.Skins.Domain.Enums;
     using OpenSkinsApi.Modules.Skins.Domain.ValueObjects;

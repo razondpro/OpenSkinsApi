@@ -1,5 +1,6 @@
 
 using OpenSkinsApi.Modules.Skins.Application.FindAvailableSkins;
+using OpenSkinsApi.Modules.Skins.Application.FindSkinById;
 
 namespace OpenSkinsApi.Config.Http
 {
@@ -8,6 +9,7 @@ namespace OpenSkinsApi.Config.Http
         public void Install(IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<FindAvailableSkinsController>();
+            services.AddScoped<FindSkinByIdController>();
         }
     }
 }
