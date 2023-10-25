@@ -7,6 +7,7 @@ namespace OpenSkinsApi.Infrastructure.Persistence
     {
         public DbSet<Skin> Skins { get; set; }
         public DbSet<Owner> Owners { get; set; }
+        public DbSet<Purchase> Purchases { get; set; }
         public Database(DbContextOptions<Database> options) : base(options)
         {
         }
