@@ -3,9 +3,8 @@ using OpenSkinsApi.Modules.Skins.Domain.Entities;
 
 namespace OpenSkinsApi.Modules.Skins.Domain.Repositories
 {
-    public interface ISkinReadRepository
+    public interface IPurchaseReadRepository
     {
-        Task<Skin?> Get(UniqueIdentity id);
-        Task<List<Skin>> GetAvailable();
+        Task<Purchase?> Get(UniqueIdentity purchaseId);
     }
 }

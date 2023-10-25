@@ -25,10 +25,10 @@ namespace OpenSkinsApi.Modules.Skins.Infrastructure.Persistence.Repositories.Imp
             return await _context.Skins.Where(skin => skin.IsAvailable).ToListAsync();
         }
 
-        public async Task<List<Skin>> GetSkinsOwnedByOwner(UniqueIdentity ownerId)
+        public async Task<List<Skin>> GetOwnedSkins(UniqueIdentity ownerId)
         {
             return await _context.Skins
-                            .Where(skin => skin.SkinOwners.Any(us => us.OwnerId == ownerId))
+                            .Where(skin => skin.Purchases.Any(us => us.OwnerId == ownerId))
                             .ToListAsync();
         }
     }
