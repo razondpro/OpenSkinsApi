@@ -17,7 +17,7 @@ namespace OpenSkinsApi.Modules.Skins.Infrastructure.Persistence.Repositories.Imp
 
         public async Task<Skin?> Get(UniqueIdentity id)
         {
-            return await _context.Skins.FindAsync(id.Value);
+            return await _context.Skins.FindAsync(id);
         }
 
         public async Task<List<Skin>> GetAvailable()
