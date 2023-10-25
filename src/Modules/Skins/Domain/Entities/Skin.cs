@@ -31,14 +31,7 @@ namespace OpenSkinsApi.Modules.Skins.Domain.Entities
 
         public static Skin Create(UniqueIdentity? id, Name name, Money price, Type type, Color color)
         {
-            var skin = new Skin(id, name, price, type, color);
-
-            if (id is null)
-            {
-                // TODO: Add SkinCreated domain event
-            }
-
-            return skin;
+            return new Skin(id, name, price, type, color);
         }
 
         public void MakeItUnavailable()
