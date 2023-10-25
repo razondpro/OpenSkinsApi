@@ -51,9 +51,9 @@ namespace OpenSkinsApi.Modules.Skins.Domain.Entities
             IsAvailable = true;
         }
 
-        public void AddOwner(User user)
+        public void AddOwner(Owner owner)
         {
-            _skinOwners.Add(SkinOwner.Create(user, this));
+            _skinOwners.Add(SkinOwner.Create(owner, this));
         }
     }
 }

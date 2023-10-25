@@ -14,34 +14,34 @@ namespace OpenSkinsApi.Tests.Modules.Skins.Application.BuySkin
     {
         private readonly Mock<ISkinReadRepository> _skinReadRepositoryMock;
         private readonly Mock<ISkinWriteRepository> _skinWriteRepositoryMock;
-        private readonly Mock<IUserReadRepository> _userReadRepositoryMock;
+        private readonly Mock<IOwnerReadRepository> _ownerReadRepositoryMock;
         private readonly BuySkinCommandHandler _handler;
 
         public BuySkinCommandHandlerTests()
         {
             _skinReadRepositoryMock = new Mock<ISkinReadRepository>();
             _skinWriteRepositoryMock = new Mock<ISkinWriteRepository>();
-            _userReadRepositoryMock = new Mock<IUserReadRepository>();
+            _ownerReadRepositoryMock = new Mock<IOwnerReadRepository>();
             _handler = new BuySkinCommandHandler(
                 _skinReadRepositoryMock.Object,
                 _skinWriteRepositoryMock.Object,
-                _userReadRepositoryMock.Object);
+                _ownerReadRepositoryMock.Object);
         }
 
         [Fact]
-        public async Task Handle_WhenUserNotFound_ReturnsUserNotFoundError()
+        public async Task Handle_WhenOwnerNotFound_ReturnsOwnerNotFoundError()
         {
             // Arrange
             var email = "test@example.com";
             var request = new BuySkinCommand(email, Guid.NewGuid().ToString());
-            _userReadRepositoryMock.Setup(x => x.FindByEmail(Email.Create(email))).ReturnsAsync(null as User);
+            _ownerReadRepositoryMock.Setup(x => x.FindByEmail(Email.Create(email))).ReturnsAsync(null as Owner);
 
             // Act
             var result = await _handler.Handle(request, CancellationToken.None);
 
             // Assert
             result.IsLeft.Should().BeTrue();
-            result.IfLeft(x => x.Should().BeOfType<UserNotFoundError>());
+            result.IfLeft(x => x.Should().BeOfType<OwnerNotFoundError>());
         }
 
         [Fact]
@@ -51,8 +51,8 @@ namespace OpenSkinsApi.Tests.Modules.Skins.Application.BuySkin
             var email = "test@example.com";
             var skinId = Guid.NewGuid();
             var request = new BuySkinCommand(email, skinId.ToString());
-            var user = User.Create(null, Email.Create(email));
-            _userReadRepositoryMock.Setup(x => x.FindByEmail(Email.Create(email))).ReturnsAsync(user);
+            var owner = Owner.Create(null, Email.Create(email));
+            _ownerReadRepositoryMock.Setup(x => x.FindByEmail(Email.Create(email))).ReturnsAsync(owner);
             _skinReadRepositoryMock.Setup(x => x.Get(new UniqueIdentity(skinId))).ReturnsAsync(null as Skin);
 
             // Act
@@ -70,9 +70,9 @@ namespace OpenSkinsApi.Tests.Modules.Skins.Application.BuySkin
             var email = "test@example.com";
             var skinId = Guid.NewGuid();
             var request = new BuySkinCommand(email, skinId.ToString());
-            var user = User.Create(null, Email.Create(email));
+            var owner = Owner.Create(null, Email.Create(email));
             var skin = Skin.Create(null, Name.Create("Skin 1"), Money.Create(10.0m), Type.Epic, Color.Red);
-            _userReadRepositoryMock.Setup(x => x.FindByEmail(Email.Create(email))).ReturnsAsync(user);
+            _ownerReadRepositoryMock.Setup(x => x.FindByEmail(Email.Create(email))).ReturnsAsync(owner);
             _skinReadRepositoryMock.Setup(x => x.Get(new UniqueIdentity(skinId))).ReturnsAsync(skin);
 
             // Act
@@ -89,11 +89,11 @@ namespace OpenSkinsApi.Tests.Modules.Skins.Application.BuySkin
             // Arrange
             var email = "test@example.com";
             var skinId = Guid.NewGuid();
-            var user = User.Create(null, Email.Create(email));
+            var owner = Owner.Create(null, Email.Create(email));
             var skin = Skin.Create(null, Name.Create("Skin 1"), Money.Create(10.0m), Type.Epic, Color.Red);
             skin.MakeItAvailable();
             var request = new BuySkinCommand(email, skinId.ToString());
-            _userReadRepositoryMock.Setup(x => x.FindByEmail(Email.Create(email))).ReturnsAsync(user);
+            _ownerReadRepositoryMock.Setup(x => x.FindByEmail(Email.Create(email))).ReturnsAsync(owner);
             _skinReadRepositoryMock.Setup(x => x.Get(new UniqueIdentity(skinId))).ReturnsAsync(skin);
 
             // Act
