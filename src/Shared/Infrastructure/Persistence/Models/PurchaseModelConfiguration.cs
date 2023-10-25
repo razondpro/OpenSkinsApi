@@ -5,60 +5,60 @@ using OpenSkinsApi.Modules.Skins.Domain.Entities;
 
 namespace OpenSkinsApi.Modules.Skins.Infrastructure.Persistence.Configurations
 {
-    public class SkinOwnerModelConfiguration : IEntityTypeConfiguration<SkinOwner>
+    public class PurchaseModelConfiguration : IEntityTypeConfiguration<Purchase>
     {
-        public void Configure(EntityTypeBuilder<SkinOwner> builder)
+        public void Configure(EntityTypeBuilder<Purchase> builder)
         {
             // Table name
-            builder.ToTable("skin_owners");
+            builder.ToTable("purchases");
             // Primary key
-            builder.HasKey(us => new { us.Id, us.OwnerId, us.SkinId });
+            builder.HasKey(p => new { p.Id, p.OwnerId, p.SkinId });
 
             // Properties
-            builder.Property(us => us.Id)
+            builder.Property(p => p.Id)
                 .IsRequired()
                 .HasColumnName("id")
                 .HasConversion(
                     id => id.Value,
                     value => new UniqueIdentity(value));
 
-            builder.Property(us => us.OwnerId)
+            builder.Property(p => p.OwnerId)
                 .IsRequired()
                 .HasColumnName("owner_id")
                 .HasConversion(
                     id => id.Value,
                     value => new UniqueIdentity(value));
 
-            builder.Property(us => us.SkinId)
+            builder.Property(p => p.SkinId)
                 .IsRequired()
                 .HasColumnName("skin_id")
                 .HasConversion(
                     id => id.Value,
                     value => new UniqueIdentity(value));
 
-            builder.Property(us => us.CreatedOn)
+            builder.Property(p => p.CreatedOn)
                 .IsRequired()
                 .HasColumnName("created_on");
 
-            builder.Property(us => us.LastModifiedOn)
+            builder.Property(p => p.LastModifiedOn)
                 .HasColumnName("last_modified_on");
 
-            builder.Property(us => us.Color)
+            builder.Property(p => p.Color)
                 .IsRequired()
                 .HasColumnName("color");
 
-            builder.Property(us => us.DeletedAt)
+            builder.Property(p => p.DeletedAt)
                 .HasColumnName("deleted_at");
 
             // Relationships
-            builder.HasOne(us => us.Owner)
+            builder.HasOne(p => p.Owner)
                 .WithMany()
-                .HasForeignKey(us => us.OwnerId)
+                .HasForeignKey(p => p.OwnerId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne(us => us.Skin)
-                .WithMany(s => s.SkinOwners)
-                .HasForeignKey(us => us.SkinId)
+            builder.HasOne(p => p.Skin)
+                .WithMany(s => s.Purchases)
+                .HasForeignKey(p => p.SkinId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

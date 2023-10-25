@@ -51,7 +51,7 @@ namespace OpenSkinsApi.Infrastructure.Persistence.Seed
         {
             var owner = Owner.Create(
                 null,
-                Email.Create("  ")
+                Email.Create("johndoe@example.com")
             );
 
             owner.CreatedOn = DateTime.UtcNow;

@@ -4,7 +4,7 @@ using OpenSkinsApi.Shared.Domain;
 
 namespace OpenSkinsApi.Modules.Skins.Domain.Entities
 {
-    public class SkinOwner : Entity, IAuditableEntity, ISoftDeletableEntity
+    public class Purchase : Entity, IAuditableEntity, ISoftDeletableEntity
     {
         public UniqueIdentity OwnerId { get; private set; }
         public UniqueIdentity SkinId { get; private set; }
@@ -16,7 +16,7 @@ namespace OpenSkinsApi.Modules.Skins.Domain.Entities
         public DateTime? DeletedAt { get; private set; }
 
         // EF Constructor
-        private SkinOwner() : base(null)
+        private Purchase() : base(null)
         {
             OwnerId = null!;
             SkinId = null!;
@@ -24,7 +24,7 @@ namespace OpenSkinsApi.Modules.Skins.Domain.Entities
             Skin = null!;
         }
 
-        private SkinOwner(Owner owner, Skin skin) : base(null)
+        private Purchase(Owner owner, Skin skin) : base(null)
         {
             OwnerId = owner.Id;
             SkinId = skin.Id;
@@ -32,9 +32,9 @@ namespace OpenSkinsApi.Modules.Skins.Domain.Entities
             Skin = skin;
         }
 
-        public static SkinOwner Create(Owner owner, Skin skin)
+        public static Purchase Create(Owner owner, Skin skin)
         {
-            return new SkinOwner(owner, skin);
+            return new Purchase(owner, skin);
         }
 
         public void ChangeColor(Color newColor)

@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Mvc;
 using OpenSkinsApi.Infrastructure.Http.Core;
 using OpenSkinsApi.Infrastructure.Http.Filters;
 using OpenSkinsApi.Modules.Skins.Application.BuySkin;
+using OpenSkinsApi.Modules.Skins.Application.DeletePurchase;
 using OpenSkinsApi.Modules.Skins.Application.FindAvailableSkins;
 using OpenSkinsApi.Modules.Skins.Application.FindSkinById;
 
@@ -32,7 +34,7 @@ namespace OpenSkinsApi.Modules.Skins.Infrastructure.Http.Routes
             .WithDescription("Find skin by Id")
             .Produces<ApiHttpErrorResponse>(StatusCodes.Status400BadRequest);
 
-            builder.MapPost("/buy", async (
+            builder.MapPost("/purchase", async (
                 CancellationToken cancellationToken,
                 BuySkinController controller,
                 BuySkinRequestDto dto) =>
@@ -42,6 +44,18 @@ namespace OpenSkinsApi.Modules.Skins.Infrastructure.Http.Routes
             .AddEndpointFilter<ValidationFilter<BuySkinRequestDto>>()
             .WithName("BuySkin")
             .WithDescription("Buy skin")
+            .Produces<ApiHttpErrorResponse>(StatusCodes.Status400BadRequest);
+
+            builder.MapDelete("/purchase", async (
+                CancellationToken cancellationToken,
+                DeletePurchaseController controller,
+                [FromBody] DeletePurchaseRequestDto dto) =>
+            {
+                return await controller.Execute(dto, cancellationToken);
+            })
+            .AddEndpointFilter<ValidationFilter<DeletePurchaseRequestDto>>()
+            .WithName("DeletePurchase")
+            .WithDescription("Delete purchase")
             .Produces<ApiHttpErrorResponse>(StatusCodes.Status400BadRequest);
 
             return builder;

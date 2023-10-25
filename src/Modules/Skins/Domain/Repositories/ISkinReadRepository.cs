@@ -7,7 +7,5 @@ namespace OpenSkinsApi.Modules.Skins.Domain.Repositories
     {
         Task<Skin?> Get(UniqueIdentity id);
         Task<List<Skin>> GetAvailable();
-        Task<List<Skin>> GetSkinsOwnedByOwner(UniqueIdentity ownerId);
-
     }
 }

@@ -44,7 +44,7 @@ namespace OpenSkinsApi.Modules.Skins.Application.BuySkin
                 return new SkinNotAvailableError();
             }
 
-            skin.AddOwner(owner);
+            skin.Buy(owner);
             await _skinWriteRepository.Update(skin);
 
             return Unit.Default;
