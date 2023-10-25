@@ -5,12 +5,12 @@ using OpenSkinsApi.Modules.Skins.Domain.Entities;
 
 namespace OpenSkinsApi.Modules.Skins.Infrastructure.Persistence.Configurations
 {
-    public class UserSkinConfiguration : IEntityTypeConfiguration<UserSkin>
+    public class SkinOwnerModelConfiguration : IEntityTypeConfiguration<SkinOwner>
     {
-        public void Configure(EntityTypeBuilder<UserSkin> builder)
+        public void Configure(EntityTypeBuilder<SkinOwner> builder)
         {
             // Table name
-            builder.ToTable("user-skins");
+            builder.ToTable("skin_owners");
             // Primary key
             builder.HasKey(us => new { us.Id, us.UserId, us.SkinId });
 
@@ -54,7 +54,7 @@ namespace OpenSkinsApi.Modules.Skins.Infrastructure.Persistence.Configurations
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(us => us.Skin)
-                .WithMany(s => s.UserSkins)
+                .WithMany(s => s.SkinOwners)
                 .HasForeignKey(us => us.SkinId)
                 .OnDelete(DeleteBehavior.Cascade);
         }

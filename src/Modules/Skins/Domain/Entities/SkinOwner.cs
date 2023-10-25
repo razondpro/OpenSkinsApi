@@ -3,7 +3,7 @@ using OpenSkinsApi.Modules.Skins.Domain.Enums;
 
 namespace OpenSkinsApi.Modules.Skins.Domain.Entities
 {
-    public class UserSkin : Entity, IAuditableEntity
+    public class SkinOwner : Entity, IAuditableEntity
     {
         public UniqueIdentity UserId { get; private set; }
         public UniqueIdentity SkinId { get; private set; }
@@ -14,7 +14,7 @@ namespace OpenSkinsApi.Modules.Skins.Domain.Entities
         public DateTime? LastModifiedOn { get; set; }
 
         // EF Constructor
-        private UserSkin() : base(null)
+        private SkinOwner() : base(null)
         {
             UserId = null!;
             SkinId = null!;
@@ -22,7 +22,7 @@ namespace OpenSkinsApi.Modules.Skins.Domain.Entities
             Skin = null!;
         }
 
-        private UserSkin(User user, Skin skin) : base(null)
+        private SkinOwner(User user, Skin skin) : base(null)
         {
             UserId = user.Id;
             SkinId = skin.Id;
@@ -30,9 +30,9 @@ namespace OpenSkinsApi.Modules.Skins.Domain.Entities
             Skin = skin;
         }
 
-        public static UserSkin Create(User user, Skin skin)
+        public static SkinOwner Create(User user, Skin skin)
         {
-            return new UserSkin(user, skin);
+            return new SkinOwner(user, skin);
         }
 
         public void ChangeColor(Color newColor)
