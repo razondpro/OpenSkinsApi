@@ -47,6 +47,9 @@ namespace OpenSkinsApi.Modules.Skins.Infrastructure.Persistence.Configurations
                 .IsRequired()
                 .HasColumnName("color");
 
+            builder.Property(us => us.DeletedAt)
+                .HasColumnName("deleted_at");
+
             // Relationships
             builder.HasOne(us => us.User)
                 .WithMany()
