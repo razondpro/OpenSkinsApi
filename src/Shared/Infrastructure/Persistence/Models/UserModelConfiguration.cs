@@ -41,10 +41,9 @@ namespace OpenSkinsApi.Infrastructure.Persistence.Models
                 .IsRequired();
 
             builder.Property(user => user.LastModifiedOn)
-                .HasColumnName("updated_on");
+                .HasColumnName("last_modified_on");
 
             //seed data
-
             builder.HasData(SeedHelper.LoadUsers());
         }
     }

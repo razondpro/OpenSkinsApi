@@ -27,7 +27,7 @@ namespace OpenSkinsApi.Modules.Skins.Domain.Entities
             UserId = user.Id;
             SkinId = skin.Id;
             User = user;
-            Skin = skin!;
+            Skin = skin;
         }
 
         public static UserSkin Create(User user, Skin skin)
