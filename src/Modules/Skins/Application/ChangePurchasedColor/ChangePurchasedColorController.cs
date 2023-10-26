@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using OpenSkinsApi.Application.Core;
@@ -9,15 +10,18 @@ namespace OpenSkinsApi.Modules.Skins.Application.ChangePurchasedColor
         IHttpController<ChangePurchasedColorRequestDto, Results<NoContent, BadRequest<ApiHttpErrorResponse>, StatusCodeHttpResult>>
     {
         private readonly IMediator _mediator;
-        public ChangePurchasedColorController(IMediator mediator)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public ChangePurchasedColorController(IMediator mediator, IHttpContextAccessor httpContextAccessor)
         {
             _mediator = mediator;
+            _httpContextAccessor = httpContextAccessor;
         }
         public async Task<Results<NoContent, BadRequest<ApiHttpErrorResponse>, StatusCodeHttpResult>>
             Execute(ChangePurchasedColorRequestDto request, CancellationToken cancellationToken = default)
         {
+            var email = _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.Email);
             var result = await _mediator.Send(
-                new ChangePurchasedColorCommand(request.ColorNumber, request.PurchaseId, request.OwnerEmail),
+                new ChangePurchasedColorCommand(request.ColorNumber, request.PurchaseId, email!),
                 cancellationToken
             );
 

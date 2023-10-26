@@ -1,22 +1,27 @@
+using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using OpenSkinsApi.Application.Core;
 using OpenSkinsApi.Infrastructure.Http.Core;
 
-namespace OpenSkinsApi.Modules.Skins.Application.BuySkin
+namespace OpenSkinsApi.Modules.Skins.Application.PurchaseSkin
 {
-    public class BuySkinController :
-        IHttpController<BuySkinRequestDto, Results<NoContent, BadRequest<ApiHttpErrorResponse>, StatusCodeHttpResult>>
+    public class PurchaseSkinController :
+        IHttpController<PurchaseSkinRequestDto, Results<NoContent, BadRequest<ApiHttpErrorResponse>, StatusCodeHttpResult>>
     {
         private readonly IMediator _mediator;
-        public BuySkinController(IMediator mediator)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public PurchaseSkinController(IMediator mediator, IHttpContextAccessor httpContextAccessor)
         {
             _mediator = mediator;
+            _httpContextAccessor = httpContextAccessor;
         }
+
         public async Task<Results<NoContent, BadRequest<ApiHttpErrorResponse>, StatusCodeHttpResult>> Execute(
-            BuySkinRequestDto request, CancellationToken cancellationToken = default)
+            PurchaseSkinRequestDto request, CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new BuySkinCommand(request.Email, request.SkinId), cancellationToken);
+            var email = _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.Email);
+            var result = await _mediator.Send(new PurchaseSkinCommand(email!, request.SkinId), cancellationToken);
 
             return result.Match<Results<NoContent, BadRequest<ApiHttpErrorResponse>, StatusCodeHttpResult>>(
                 Right: _ => TypedResults.NoContent(),

@@ -4,19 +4,20 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Moq;
 using OpenSkinsApi.Infrastructure.Http.Core;
 using OpenSkinsApi.Modules.Skins.Application.ChangePurchasedColor;
+using OpenSkinsApi.Tests.Base;
 using Xunit;
 
 namespace OpenSkinsApi.Tests.Modules.Skins.Application.ChangePurchasedColor
 {
-    public class ChangePurchasedColorControllerTests
+    public class ChangePurchasedColorControllerTests : BaseTest
     {
         private readonly Mock<IMediator> _mediatorMock;
         private readonly ChangePurchasedColorController _controller;
 
-        public ChangePurchasedColorControllerTests()
+        public ChangePurchasedColorControllerTests(HttpContextFixture fixture) : base(fixture)
         {
             _mediatorMock = new Mock<IMediator>();
-            _controller = new ChangePurchasedColorController(_mediatorMock.Object);
+            _controller = new ChangePurchasedColorController(_mediatorMock.Object, _httpContextAccessorMock.Object);
         }
 
         [Fact]
@@ -24,9 +25,8 @@ namespace OpenSkinsApi.Tests.Modules.Skins.Application.ChangePurchasedColor
         {
             // Arrange
             var purchaseId = "123";
-            var ownerEmail = "test@example.com";
             var colorNumber = 0;
-            var request = new ChangePurchasedColorRequestDto(colorNumber, purchaseId, ownerEmail);
+            var request = new ChangePurchasedColorRequestDto(colorNumber, purchaseId);
             _mediatorMock.Setup(x => x.Send(It.IsAny<ChangePurchasedColorCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(LanguageExt.Unit.Default);
 
             // Act
@@ -43,9 +43,8 @@ namespace OpenSkinsApi.Tests.Modules.Skins.Application.ChangePurchasedColor
         {
             // Arrange
             var purchaseId = "123";
-            var ownerEmail = "test@example.com";
             var colorNumber = 0;
-            var request = new ChangePurchasedColorRequestDto(colorNumber, purchaseId, ownerEmail);
+            var request = new ChangePurchasedColorRequestDto(colorNumber, purchaseId);
             _mediatorMock.Setup(x => x.Send(It.IsAny<ChangePurchasedColorCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new SkinNotOwnedError());
 
             // Act
@@ -66,9 +65,8 @@ namespace OpenSkinsApi.Tests.Modules.Skins.Application.ChangePurchasedColor
         {
             // Arrange
             var purchaseId = "123";
-            var ownerEmail = "test@example.com";
             var colorNumber = 0;
-            var request = new ChangePurchasedColorRequestDto(colorNumber, purchaseId, ownerEmail);
+            var request = new ChangePurchasedColorRequestDto(colorNumber, purchaseId);
             _mediatorMock.Setup(x => x.Send(It.IsAny<ChangePurchasedColorCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new SkinAlreadyHasSameColorError());
 
             // Act
@@ -89,9 +87,8 @@ namespace OpenSkinsApi.Tests.Modules.Skins.Application.ChangePurchasedColor
         {
             // Arrange
             var purchaseId = "123";
-            var ownerEmail = "test@example.com";
             var colorNumber = 0;
-            var request = new ChangePurchasedColorRequestDto(colorNumber, purchaseId, ownerEmail);
+            var request = new ChangePurchasedColorRequestDto(colorNumber, purchaseId);
             _mediatorMock.Setup(x => x.Send(It.IsAny<ChangePurchasedColorCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Exception());
 
             // Act

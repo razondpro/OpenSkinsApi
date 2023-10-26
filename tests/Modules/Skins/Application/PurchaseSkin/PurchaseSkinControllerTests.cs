@@ -1,31 +1,32 @@
+using System.Security.Claims;
 using FluentAssertions;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Moq;
 using OpenSkinsApi.Infrastructure.Http.Core;
-using OpenSkinsApi.Modules.Skins.Application.BuySkin;
+using OpenSkinsApi.Modules.Skins.Application.PurchaseSkin;
+using OpenSkinsApi.Tests.Base;
 using Xunit;
 
-namespace OpenSkinsApi.Tests.Modules.Skins.Application.BuySkin
+namespace OpenSkinsApi.Tests.Modules.Skins.Application.PurchaseSkin
 {
-    public class BuySkinControllerTests
+    public class PurchaseSkinControllerTests : BaseTest
     {
-
         private readonly Mock<IMediator> _mediatorMock;
-        private readonly BuySkinController _controller;
+        private readonly PurchaseSkinController _controller;
 
-        public BuySkinControllerTests()
+        public PurchaseSkinControllerTests(HttpContextFixture fixture) : base(fixture)
         {
             _mediatorMock = new Mock<IMediator>();
-            _controller = new BuySkinController(_mediatorMock.Object);
+            _controller = new PurchaseSkinController(_mediatorMock.Object, _httpContextAccessorMock.Object);
         }
 
         [Fact]
-        public async Task Execute_WhenBuySkinCommandSucceeds_ReturnsNoContent()
+        public async Task Execute_WhenPurchaseSkinCommandSucceeds_ReturnsNoContent()
         {
             // Arrange
-            var request = new BuySkinRequestDto("test@example.com", Guid.NewGuid().ToString());
-            _mediatorMock.Setup(x => x.Send(It.IsAny<BuySkinCommand>(), default)).ReturnsAsync(LanguageExt.Unit.Default);
+            var request = new PurchaseSkinRequestDto(Guid.NewGuid().ToString());
+            _mediatorMock.Setup(x => x.Send(It.IsAny<PurchaseSkinCommand>(), default)).ReturnsAsync(LanguageExt.Unit.Default);
 
             // Act
             var result = await _controller.Execute(request);
@@ -41,8 +42,8 @@ namespace OpenSkinsApi.Tests.Modules.Skins.Application.BuySkin
         public async Task Execute_WhenOwnerNotFound_ReturnsBadRequestWithOwnerNotFoundError()
         {
             // Arrange
-            var request = new BuySkinRequestDto("test@example.com", Guid.NewGuid().ToString());
-            _mediatorMock.Setup(x => x.Send(It.IsAny<BuySkinCommand>(), default)).ReturnsAsync(new OwnerNotFoundError());
+            var request = new PurchaseSkinRequestDto(Guid.NewGuid().ToString());
+            _mediatorMock.Setup(x => x.Send(It.IsAny<PurchaseSkinCommand>(), default)).ReturnsAsync(new OwnerNotFoundError());
 
             // Act
             var result = await _controller.Execute(request);
@@ -61,8 +62,8 @@ namespace OpenSkinsApi.Tests.Modules.Skins.Application.BuySkin
         public async Task Execute_WhenSkinNotFound_ReturnsBadRequestWithSkinNotFoundError()
         {
             // Arrange
-            var request = new BuySkinRequestDto("test@example.com", Guid.NewGuid().ToString());
-            _mediatorMock.Setup(x => x.Send(It.IsAny<BuySkinCommand>(), default)).ReturnsAsync(new SkinNotFoundError());
+            var request = new PurchaseSkinRequestDto(Guid.NewGuid().ToString());
+            _mediatorMock.Setup(x => x.Send(It.IsAny<PurchaseSkinCommand>(), default)).ReturnsAsync(new SkinNotFoundError());
 
             // Act
             var result = await _controller.Execute(request);
@@ -78,11 +79,11 @@ namespace OpenSkinsApi.Tests.Modules.Skins.Application.BuySkin
         }
 
         [Fact]
-        public async Task Execute_WhenBuySkinCommandFails_ReturnsInternalServerError()
+        public async Task Execute_WhenPurchaseSkinCommandFails_ReturnsInternalServerError()
         {
             // Arrange
-            var request = new BuySkinRequestDto("test@example.com", Guid.NewGuid().ToString());
-            _mediatorMock.Setup(x => x.Send(It.IsAny<BuySkinCommand>(), default)).ReturnsAsync(new Exception());
+            var request = new PurchaseSkinRequestDto(Guid.NewGuid().ToString());
+            _mediatorMock.Setup(x => x.Send(It.IsAny<PurchaseSkinCommand>(), default)).ReturnsAsync(new Exception());
 
             // Act
             var result = await _controller.Execute(request);

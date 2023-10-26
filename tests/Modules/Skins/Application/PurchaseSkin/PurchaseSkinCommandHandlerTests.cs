@@ -1,28 +1,28 @@
-namespace OpenSkinsApi.Tests.Modules.Skins.Application.BuySkin
+namespace OpenSkinsApi.Tests.Modules.Skins.Application.PurchaseSkin
 {
     using FluentAssertions;
     using LanguageExt;
     using Moq;
     using OpenSkinsApi.Domain;
-    using OpenSkinsApi.Modules.Skins.Application.BuySkin;
+    using OpenSkinsApi.Modules.Skins.Application.PurchaseSkin;
     using OpenSkinsApi.Modules.Skins.Domain.Entities;
     using OpenSkinsApi.Modules.Skins.Domain.Enums;
     using OpenSkinsApi.Modules.Skins.Domain.Repositories;
     using OpenSkinsApi.Modules.Skins.Domain.ValueObjects;
     using Xunit;
-    public class BuySkinCommandHandlerTests
+    public class PurchaseSkinCommandHandlerTests
     {
         private readonly Mock<ISkinReadRepository> _skinReadRepositoryMock;
         private readonly Mock<ISkinWriteRepository> _skinWriteRepositoryMock;
         private readonly Mock<IOwnerReadRepository> _ownerReadRepositoryMock;
-        private readonly BuySkinCommandHandler _handler;
+        private readonly PurchaseSkinCommandHandler _handler;
 
-        public BuySkinCommandHandlerTests()
+        public PurchaseSkinCommandHandlerTests()
         {
             _skinReadRepositoryMock = new Mock<ISkinReadRepository>();
             _skinWriteRepositoryMock = new Mock<ISkinWriteRepository>();
             _ownerReadRepositoryMock = new Mock<IOwnerReadRepository>();
-            _handler = new BuySkinCommandHandler(
+            _handler = new PurchaseSkinCommandHandler(
                 _skinReadRepositoryMock.Object,
                 _skinWriteRepositoryMock.Object,
                 _ownerReadRepositoryMock.Object);
@@ -33,7 +33,7 @@ namespace OpenSkinsApi.Tests.Modules.Skins.Application.BuySkin
         {
             // Arrange
             var email = "test@example.com";
-            var request = new BuySkinCommand(email, Guid.NewGuid().ToString());
+            var request = new PurchaseSkinCommand(email, Guid.NewGuid().ToString());
             _ownerReadRepositoryMock.Setup(x => x.FindByEmail(Email.Create(email))).ReturnsAsync(null as Owner);
 
             // Act
@@ -50,7 +50,7 @@ namespace OpenSkinsApi.Tests.Modules.Skins.Application.BuySkin
             // Arrange
             var email = "test@example.com";
             var skinId = Guid.NewGuid();
-            var request = new BuySkinCommand(email, skinId.ToString());
+            var request = new PurchaseSkinCommand(email, skinId.ToString());
             var owner = Owner.Create(null, Email.Create(email));
             _ownerReadRepositoryMock.Setup(x => x.FindByEmail(Email.Create(email))).ReturnsAsync(owner);
             _skinReadRepositoryMock.Setup(x => x.Get(new UniqueIdentity(skinId))).ReturnsAsync(null as Skin);
@@ -69,7 +69,7 @@ namespace OpenSkinsApi.Tests.Modules.Skins.Application.BuySkin
             // Arrange
             var email = "test@example.com";
             var skinId = Guid.NewGuid();
-            var request = new BuySkinCommand(email, skinId.ToString());
+            var request = new PurchaseSkinCommand(email, skinId.ToString());
             var owner = Owner.Create(null, Email.Create(email));
             var skin = Skin.Create(null, Name.Create("Skin 1"), Money.Create(10.0m), Type.Epic, Color.Red);
             _ownerReadRepositoryMock.Setup(x => x.FindByEmail(Email.Create(email))).ReturnsAsync(owner);
@@ -92,7 +92,7 @@ namespace OpenSkinsApi.Tests.Modules.Skins.Application.BuySkin
             var owner = Owner.Create(null, Email.Create(email));
             var skin = Skin.Create(null, Name.Create("Skin 1"), Money.Create(10.0m), Type.Epic, Color.Red);
             skin.MakeItAvailable();
-            var request = new BuySkinCommand(email, skinId.ToString());
+            var request = new PurchaseSkinCommand(email, skinId.ToString());
             _ownerReadRepositoryMock.Setup(x => x.FindByEmail(Email.Create(email))).ReturnsAsync(owner);
             _skinReadRepositoryMock.Setup(x => x.Get(new UniqueIdentity(skinId))).ReturnsAsync(skin);
 

@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using OpenSkinsApi.Application.Core;
@@ -9,13 +10,16 @@ namespace OpenSkinsApi.Modules.Skins.Application.DeletePurchase
         <DeletePurchaseRequestDto, Results<NoContent, BadRequest<ApiHttpErrorResponse>, StatusCodeHttpResult>>
     {
         private readonly IMediator _mediator;
-        public DeletePurchaseController(IMediator mediator)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public DeletePurchaseController(IMediator mediator, IHttpContextAccessor httpContextAccessor)
         {
             _mediator = mediator;
+            _httpContextAccessor = httpContextAccessor;
         }
         public async Task<Results<NoContent, BadRequest<ApiHttpErrorResponse>, StatusCodeHttpResult>> Execute(DeletePurchaseRequestDto request, CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new DeleteOwnedSkinCommand(request.PurchaseId, request.OwnerEmail), cancellationToken);
+            var email = _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.Email);
+            var result = await _mediator.Send(new DeleteOwnedSkinCommand(request.PurchaseId, email!), cancellationToken);
 
             return result.Match<Results<NoContent, BadRequest<ApiHttpErrorResponse>, StatusCodeHttpResult>>(
                 Right: _ => TypedResults.NoContent(),
