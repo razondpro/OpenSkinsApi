@@ -3,6 +3,7 @@ using OpenSkinsApi.Modules.Skins.Application.ChangePurchasedColor;
 using OpenSkinsApi.Modules.Skins.Application.DeletePurchase;
 using OpenSkinsApi.Modules.Skins.Application.FindAvailableSkins;
 using OpenSkinsApi.Modules.Skins.Application.FindSkinById;
+using OpenSkinsApi.Modules.Skins.Application.FindMySkins;
 
 namespace OpenSkinsApi.Config.Http
 {
@@ -16,6 +17,7 @@ namespace OpenSkinsApi.Config.Http
             services.AddScoped<PurchaseSkinController>();
             services.AddScoped<DeletePurchaseController>();
             services.AddScoped<ChangePurchasedColorController>();
+            services.AddScoped<FindMySkinsController>();
         }
     }
 }

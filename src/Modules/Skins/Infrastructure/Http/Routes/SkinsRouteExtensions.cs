@@ -6,6 +6,7 @@ using OpenSkinsApi.Modules.Skins.Application.ChangePurchasedColor;
 using OpenSkinsApi.Modules.Skins.Application.DeletePurchase;
 using OpenSkinsApi.Modules.Skins.Application.FindAvailableSkins;
 using OpenSkinsApi.Modules.Skins.Application.FindSkinById;
+using OpenSkinsApi.Modules.Skins.Application.FindMySkins;
 
 namespace OpenSkinsApi.Modules.Skins.Infrastructure.Http.Routes
 {
@@ -15,10 +16,9 @@ namespace OpenSkinsApi.Modules.Skins.Infrastructure.Http.Routes
         {
             builder.MapGet("/available", async (
                 CancellationToken cancellationToken,
-                FindAvailableSkinsController controller,
-                [AsParameters] FindAvailableSkinsRequestDto dto) =>
+                FindAvailableSkinsController controller) =>
             {
-                return await controller.Execute(dto, cancellationToken);
+                return await controller.Execute(null!, cancellationToken);
             })
             .WithName("FindAvailableSkins")
             .WithDescription("Find available skins");
@@ -47,16 +47,14 @@ namespace OpenSkinsApi.Modules.Skins.Infrastructure.Http.Routes
             .WithDescription("Purchase a new skin")
             .Produces<ApiHttpErrorResponse>(StatusCodes.Status400BadRequest);
 
-            builder.MapDelete("/purchase/{purchaseId}", async (
+            builder.MapGet("/myskins", async (
                 CancellationToken cancellationToken,
-                DeletePurchaseController controller,
-                [AsParameters] DeletePurchaseRequestDto dto) =>
+                FindMySkinsController controller) =>
             {
-                return await controller.Execute(dto, cancellationToken);
+                return await controller.Execute(null!, cancellationToken);
             })
-            .AddEndpointFilter<ValidationFilter<DeletePurchaseRequestDto>>()
-            .WithName("DeletePurchase")
-            .WithDescription("Delete purchase")
+            .WithName("FindMySkins")
+            .WithDescription("Find my purchased skins")
             .Produces<ApiHttpErrorResponse>(StatusCodes.Status400BadRequest);
 
             builder.MapPut("/purchase/color", async (
@@ -71,6 +69,17 @@ namespace OpenSkinsApi.Modules.Skins.Infrastructure.Http.Routes
             .WithDescription("Change aquired skin color")
             .Produces<ApiHttpErrorResponse>(StatusCodes.Status400BadRequest);
 
+            builder.MapDelete("/purchase/{purchaseId}", async (
+                CancellationToken cancellationToken,
+                DeletePurchaseController controller,
+                [AsParameters] DeletePurchaseRequestDto dto) =>
+            {
+                return await controller.Execute(dto, cancellationToken);
+            })
+            .AddEndpointFilter<ValidationFilter<DeletePurchaseRequestDto>>()
+            .WithName("DeletePurchase")
+            .WithDescription("Delete purchase")
+            .Produces<ApiHttpErrorResponse>(StatusCodes.Status400BadRequest);
 
             return builder;
         }
