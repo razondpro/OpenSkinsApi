@@ -4,22 +4,26 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using OpenSkinsApi.Application.Core;
 using OpenSkinsApi.Infrastructure.Http.Core;
 
-namespace OpenSkinsApi.Modules.Skins.Application.DeletePurchase
+namespace OpenSkinsApi.Modules.Skins.Application.ChangePurchasedColor
 {
-    public class DeletePurchaseController : IHttpController
-        <DeletePurchaseRequestDto, Results<NoContent, BadRequest<ApiHttpErrorResponse>, StatusCodeHttpResult>>
+    public class ChangePurchasedColorController :
+        IHttpController<ChangePurchasedColorRequestDto, Results<NoContent, BadRequest<ApiHttpErrorResponse>, StatusCodeHttpResult>>
     {
         private readonly IMediator _mediator;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public DeletePurchaseController(IMediator mediator, IHttpContextAccessor httpContextAccessor)
+        public ChangePurchasedColorController(IMediator mediator, IHttpContextAccessor httpContextAccessor)
         {
             _mediator = mediator;
             _httpContextAccessor = httpContextAccessor;
         }
-        public async Task<Results<NoContent, BadRequest<ApiHttpErrorResponse>, StatusCodeHttpResult>> Execute(DeletePurchaseRequestDto request, CancellationToken cancellationToken = default)
+        public async Task<Results<NoContent, BadRequest<ApiHttpErrorResponse>, StatusCodeHttpResult>>
+            Execute(ChangePurchasedColorRequestDto request, CancellationToken cancellationToken = default)
         {
             var email = _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.Email);
-            var result = await _mediator.Send(new DeleteOwnedSkinCommand(request.PurchaseId, email!), cancellationToken);
+            var result = await _mediator.Send(
+                new ChangePurchasedColorCommand(request.ColorNumber, request.PurchaseId, email!),
+                cancellationToken
+            );
 
             return result.Match<Results<NoContent, BadRequest<ApiHttpErrorResponse>, StatusCodeHttpResult>>(
                 Right: _ => TypedResults.NoContent(),
@@ -29,6 +33,11 @@ namespace OpenSkinsApi.Modules.Skins.Application.DeletePurchase
                         title: "Bad Request",
                         status: StatusCodes.Status400BadRequest,
                         errors: new List<ErrorDetail> { new("PurchaseId", "Skin not owned") }
+                    )),
+                    SkinAlreadyHasSameColorError => TypedResults.BadRequest(new ApiHttpErrorResponse(
+                        title: "Bad Request",
+                        status: StatusCodes.Status400BadRequest,
+                        errors: new List<ErrorDetail> { new("ColorNumber", "Skin already has same color") }
                     )),
                     _ => TypedResults.StatusCode(StatusCodes.Status500InternalServerError)
                 }

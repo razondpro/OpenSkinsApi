@@ -24,6 +24,8 @@ namespace OpenSkinsApi.Infrastructure.Http
         {
             //request body validation middleware (we only accept valid json)
             _app.UseMiddleware<JsonValidationMiddleware>();
+            //injecting a claim for the email address of the user in every request
+            _app.UseMiddleware<EmailClaimMiddleware>();
 
             if (_app.Environment.IsDevelopment())
             {

@@ -1,4 +1,5 @@
-using OpenSkinsApi.Modules.Skins.Application.BuySkin;
+using OpenSkinsApi.Modules.Skins.Application.PurchaseSkin;
+using OpenSkinsApi.Modules.Skins.Application.ChangePurchasedColor;
 using OpenSkinsApi.Modules.Skins.Application.DeletePurchase;
 using OpenSkinsApi.Modules.Skins.Application.FindAvailableSkins;
 using OpenSkinsApi.Modules.Skins.Application.FindSkinById;
@@ -9,10 +10,12 @@ namespace OpenSkinsApi.Config.Http
     {
         public void Install(IServiceCollection services, IConfiguration configuration)
         {
+            services.AddHttpContextAccessor();
             services.AddScoped<FindAvailableSkinsController>();
             services.AddScoped<FindSkinByIdController>();
-            services.AddScoped<BuySkinController>();
+            services.AddScoped<PurchaseSkinController>();
             services.AddScoped<DeletePurchaseController>();
+            services.AddScoped<ChangePurchasedColorController>();
         }
     }
 }

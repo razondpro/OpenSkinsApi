@@ -1,6 +1,6 @@
 using OpenSkinsApi.Application.Exceptions;
 
-namespace OpenSkinsApi.Modules.Skins.Application.BuySkin
+namespace OpenSkinsApi.Modules.Skins.Application.PurchaseSkin
 {
     public class OwnerNotFoundError : ApplicationError
     {
