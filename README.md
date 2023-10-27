@@ -2,11 +2,11 @@
 
 `OpenSkinsApi` is a test project developed for the Backend Hackathon organized by Mobile World Capital. The project is designed to showcase the use of Domain-Driven Design (DDD) principles, Clean Architecture, and CQRS (Command Query Responsibility Segregation) pattern in building a scalable and maintainable service.
 
-The project is built using .NET Core, a cross-platform, open-source framework for building modern web applications. The project uses a modular architecture, with each module representing a distinct domain of the application. The Skins module is included as an example of how to implement a module using the DDD approach.
+The project is built using .NET Core, and uses a modular architecture with each module representing a distinct domain of the application. The Skins module is included as an example of how to implement a module using the DDD approach.
 
 It has been designed to be easily extensible and maintainable, with a focus on separation of concerns and testability. The project includes unit tests for the `Skins` module, which demonstrate how to test the various components of the module using the DDD approach.
 
-Overall, `OpenSkinsApi` is a demonstration of how to build a modern, scalable, and maintainable REST Api using the latest technologies and best practices.
+Overall, `OpenSkinsApi` is a demonstration of how to build a modern, scalable, and maintainable projects using the latest technologies and best practices.
 
 ## Architecture
 
