@@ -30,6 +30,7 @@ namespace OpenSkinsApi.Infrastructure.Http
             if (_app.Environment.IsDevelopment())
             {
                 _app.UseDeveloperExceptionPage();
+                _app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             }
         }
 

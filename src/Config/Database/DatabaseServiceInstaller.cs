@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using OpenSkinsApi.Infrastructure.Persistence.Core.Interceptors;
 using OpenSkinsApi.Infrastructure.Persistence.Core.UnitOfWork;
 using OpenSkinsApi.Modules.Skins.Domain.Repositories;
@@ -10,7 +11,6 @@ namespace OpenSkinsApi.Config.Database
         public void Install(IServiceCollection services, IConfiguration configuration)
         {
             services.AddDatabase();
-            services.AddSingleton<UpdateAuditableEntitiesInterceptor>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ISkinReadRepository, SkinReadRepository>();
             services.AddScoped<ISkinWriteRepository, SkinWriteRepository>();
