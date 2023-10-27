@@ -91,8 +91,6 @@ Note that the available `Colors` for a skin are limited to the following options
 
 When making a request to change color route, the new color for the skin should be specified as an integer between 0 and 9, where each integer corresponds to one of the available colors. For example, an integer value of 0 represents the color Red, while an integer value of 1 represents the color Green, and so on.
 
----
-
 `Type` represents the different types of skins that can be purchased in the Skins module and it includes the following values:
 
 - Normal: Represents a normal skin, which is the most common type of skin.
@@ -103,3 +101,7 @@ When making a request to change color route, the new color for the skin should b
 Note that the `Type` values are represented as integers internally, with Normal being 0, Rare being 1, Epic being 2, and Legendary being 3. This allows for easy comparison and sorting of skin types in the codebase.
 
 ---
+
+### License
+
+Free to use and modify
