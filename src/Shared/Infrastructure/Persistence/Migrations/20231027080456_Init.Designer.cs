@@ -2,17 +2,20 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OpenSkinsApi.Infrastructure.Persistence;
 
 #nullable disable
 
-namespace OpenSkinsApi.Migrations
+namespace OpenSkinsApi.Shared.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(Database))]
-    partial class DatabaseModelSnapshot : ModelSnapshot
+    [Migration("20231027080456_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,8 +52,8 @@ namespace OpenSkinsApi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ae72c8ce-fdbb-4eda-88a2-fa7f250c471b"),
-                            CreatedOn = new DateTime(2023, 10, 26, 22, 56, 24, 113, DateTimeKind.Utc).AddTicks(7760),
+                            Id = new Guid("65bfa21c-43f4-4430-80b2-97d82d40a0d5"),
+                            CreatedOn = new DateTime(2023, 10, 27, 8, 4, 56, 440, DateTimeKind.Utc).AddTicks(9000),
                             Email = "johndoe@example.com"
                         });
                 });
@@ -139,9 +142,9 @@ namespace OpenSkinsApi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3ebcb0df-4c44-400c-a462-d72373afb22a"),
+                            Id = new Guid("fe295ef3-7e62-4c0a-aa93-70610a940162"),
                             Color = "Yellow",
-                            CreatedOn = new DateTime(2023, 10, 26, 22, 56, 24, 114, DateTimeKind.Utc).AddTicks(6560),
+                            CreatedOn = new DateTime(2023, 10, 27, 8, 4, 56, 441, DateTimeKind.Utc).AddTicks(7690),
                             IsAvailable = false,
                             Name = "Skin1",
                             Price = 19.99m,
@@ -149,9 +152,9 @@ namespace OpenSkinsApi.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d87ad62e-ca2c-49e0-9168-a07b84f59593"),
+                            Id = new Guid("d3cc6d9f-1bbb-4b22-b1ed-93bbb4b74f64"),
                             Color = "Green",
-                            CreatedOn = new DateTime(2023, 10, 26, 22, 56, 24, 114, DateTimeKind.Utc).AddTicks(6570),
+                            CreatedOn = new DateTime(2023, 10, 27, 8, 4, 56, 441, DateTimeKind.Utc).AddTicks(7690),
                             IsAvailable = true,
                             Name = "Skin2",
                             Price = 9.99m,
@@ -159,9 +162,9 @@ namespace OpenSkinsApi.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4c462570-c196-46f2-a1d7-e1fd4b522ed9"),
+                            Id = new Guid("5994e1d8-d643-4eb1-8f51-8bf1caa3edca"),
                             Color = "Purple",
-                            CreatedOn = new DateTime(2023, 10, 26, 22, 56, 24, 114, DateTimeKind.Utc).AddTicks(6580),
+                            CreatedOn = new DateTime(2023, 10, 27, 8, 4, 56, 441, DateTimeKind.Utc).AddTicks(7700),
                             IsAvailable = true,
                             Name = "Skin3",
                             Price = 15.99m,
@@ -169,9 +172,9 @@ namespace OpenSkinsApi.Migrations
                         },
                         new
                         {
-                            Id = new Guid("101f3b98-cb0d-4929-a2ac-a5e8afd921b3"),
+                            Id = new Guid("ca99ed0c-9c71-47c5-8d28-1e26456553dd"),
                             Color = "Pink",
-                            CreatedOn = new DateTime(2023, 10, 26, 22, 56, 24, 114, DateTimeKind.Utc).AddTicks(6580),
+                            CreatedOn = new DateTime(2023, 10, 27, 8, 4, 56, 441, DateTimeKind.Utc).AddTicks(7700),
                             IsAvailable = true,
                             Name = "Skin4",
                             Price = 29.99m,
@@ -179,9 +182,9 @@ namespace OpenSkinsApi.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3a36d8fb-5d1c-4e6d-9b51-4d59e029c181"),
+                            Id = new Guid("6f8d1cf3-8538-4ae9-9264-a9f5af66fe88"),
                             Color = "Blue",
-                            CreatedOn = new DateTime(2023, 10, 26, 22, 56, 24, 114, DateTimeKind.Utc).AddTicks(6590),
+                            CreatedOn = new DateTime(2023, 10, 27, 8, 4, 56, 441, DateTimeKind.Utc).AddTicks(7710),
                             IsAvailable = true,
                             Name = "Skin5",
                             Price = 24.99m,
@@ -189,9 +192,9 @@ namespace OpenSkinsApi.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2794c8d0-9665-40fc-a24f-c9b534b38401"),
+                            Id = new Guid("93d79334-fcae-4344-9b61-68a5f60bc737"),
                             Color = "Brown",
-                            CreatedOn = new DateTime(2023, 10, 26, 22, 56, 24, 114, DateTimeKind.Utc).AddTicks(6590),
+                            CreatedOn = new DateTime(2023, 10, 27, 8, 4, 56, 441, DateTimeKind.Utc).AddTicks(7710),
                             IsAvailable = false,
                             Name = "Skin6",
                             Price = 12.99m,
@@ -199,9 +202,9 @@ namespace OpenSkinsApi.Migrations
                         },
                         new
                         {
-                            Id = new Guid("80762e49-265b-4466-9648-a6f6f0b5f3cf"),
+                            Id = new Guid("49e7fdf6-90bf-41fb-9bb2-3d8cfb0f9f5e"),
                             Color = "Red",
-                            CreatedOn = new DateTime(2023, 10, 26, 22, 56, 24, 114, DateTimeKind.Utc).AddTicks(6600),
+                            CreatedOn = new DateTime(2023, 10, 27, 8, 4, 56, 441, DateTimeKind.Utc).AddTicks(7720),
                             IsAvailable = true,
                             Name = "Skin7",
                             Price = 17.99m,
@@ -209,9 +212,9 @@ namespace OpenSkinsApi.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5cf6e618-ea7d-4aa8-b051-c5b7d6c11191"),
+                            Id = new Guid("241a1ca9-f26e-40f6-8ff7-5c039dc07874"),
                             Color = "Orange",
-                            CreatedOn = new DateTime(2023, 10, 26, 22, 56, 24, 114, DateTimeKind.Utc).AddTicks(6600),
+                            CreatedOn = new DateTime(2023, 10, 27, 8, 4, 56, 441, DateTimeKind.Utc).AddTicks(7720),
                             IsAvailable = true,
                             Name = "Skin8",
                             Price = 14.99m,
@@ -219,9 +222,9 @@ namespace OpenSkinsApi.Migrations
                         },
                         new
                         {
-                            Id = new Guid("65a9ce90-9430-4988-aa89-a4308d3291c5"),
+                            Id = new Guid("d7e90c6c-c9f4-481c-8f1e-b634b1069594"),
                             Color = "Yellow",
-                            CreatedOn = new DateTime(2023, 10, 26, 22, 56, 24, 114, DateTimeKind.Utc).AddTicks(6610),
+                            CreatedOn = new DateTime(2023, 10, 27, 8, 4, 56, 441, DateTimeKind.Utc).AddTicks(7720),
                             IsAvailable = false,
                             Name = "Skin9",
                             Price = 22.99m,
@@ -229,9 +232,9 @@ namespace OpenSkinsApi.Migrations
                         },
                         new
                         {
-                            Id = new Guid("bd6b1eef-4c5e-4672-852c-394e6849c518"),
+                            Id = new Guid("e477e5f3-ddfa-4213-92b8-21a191632810"),
                             Color = "White",
-                            CreatedOn = new DateTime(2023, 10, 26, 22, 56, 24, 114, DateTimeKind.Utc).AddTicks(6610),
+                            CreatedOn = new DateTime(2023, 10, 27, 8, 4, 56, 441, DateTimeKind.Utc).AddTicks(7730),
                             IsAvailable = true,
                             Name = "Skin10",
                             Price = 19.99m,
@@ -239,9 +242,9 @@ namespace OpenSkinsApi.Migrations
                         },
                         new
                         {
-                            Id = new Guid("87af4649-9dd4-414b-990f-211083cfa162"),
+                            Id = new Guid("0e238b35-a0ce-4760-ac73-a41f9b07ab59"),
                             Color = "Green",
-                            CreatedOn = new DateTime(2023, 10, 26, 22, 56, 24, 114, DateTimeKind.Utc).AddTicks(6620),
+                            CreatedOn = new DateTime(2023, 10, 27, 8, 4, 56, 441, DateTimeKind.Utc).AddTicks(7730),
                             IsAvailable = false,
                             Name = "Skin11",
                             Price = 24.99m,

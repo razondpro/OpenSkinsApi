@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace OpenSkinsApi.Migrations
+namespace OpenSkinsApi.Shared.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
     public partial class Init : Migration
@@ -87,24 +87,24 @@ namespace OpenSkinsApi.Migrations
             migrationBuilder.InsertData(
                 table: "owners",
                 columns: new[] { "id", "created_on", "email", "last_modified_on" },
-                values: new object[] { new Guid("ae72c8ce-fdbb-4eda-88a2-fa7f250c471b"), new DateTime(2023, 10, 26, 22, 56, 24, 113, DateTimeKind.Utc).AddTicks(7760), "johndoe@example.com", null });
+                values: new object[] { new Guid("65bfa21c-43f4-4430-80b2-97d82d40a0d5"), new DateTime(2023, 10, 27, 8, 4, 56, 440, DateTimeKind.Utc).AddTicks(9000), "johndoe@example.com", null });
 
             migrationBuilder.InsertData(
                 table: "skins",
                 columns: new[] { "id", "color", "created_on", "is_available", "last_modified_on", "name", "price", "type" },
                 values: new object[,]
                 {
-                    { new Guid("101f3b98-cb0d-4929-a2ac-a5e8afd921b3"), "Pink", new DateTime(2023, 10, 26, 22, 56, 24, 114, DateTimeKind.Utc).AddTicks(6580), true, null, "Skin4", 29.99m, "Legendary" },
-                    { new Guid("2794c8d0-9665-40fc-a24f-c9b534b38401"), "Brown", new DateTime(2023, 10, 26, 22, 56, 24, 114, DateTimeKind.Utc).AddTicks(6590), false, null, "Skin6", 12.99m, "Rare" },
-                    { new Guid("3a36d8fb-5d1c-4e6d-9b51-4d59e029c181"), "Blue", new DateTime(2023, 10, 26, 22, 56, 24, 114, DateTimeKind.Utc).AddTicks(6590), true, null, "Skin5", 24.99m, "Normal" },
-                    { new Guid("3ebcb0df-4c44-400c-a462-d72373afb22a"), "Yellow", new DateTime(2023, 10, 26, 22, 56, 24, 114, DateTimeKind.Utc).AddTicks(6560), false, null, "Skin1", 19.99m, "Rare" },
-                    { new Guid("4c462570-c196-46f2-a1d7-e1fd4b522ed9"), "Purple", new DateTime(2023, 10, 26, 22, 56, 24, 114, DateTimeKind.Utc).AddTicks(6580), true, null, "Skin3", 15.99m, "Epic" },
-                    { new Guid("5cf6e618-ea7d-4aa8-b051-c5b7d6c11191"), "Orange", new DateTime(2023, 10, 26, 22, 56, 24, 114, DateTimeKind.Utc).AddTicks(6600), true, null, "Skin8", 14.99m, "Legendary" },
-                    { new Guid("65a9ce90-9430-4988-aa89-a4308d3291c5"), "Yellow", new DateTime(2023, 10, 26, 22, 56, 24, 114, DateTimeKind.Utc).AddTicks(6610), false, null, "Skin9", 22.99m, "Normal" },
-                    { new Guid("80762e49-265b-4466-9648-a6f6f0b5f3cf"), "Red", new DateTime(2023, 10, 26, 22, 56, 24, 114, DateTimeKind.Utc).AddTicks(6600), true, null, "Skin7", 17.99m, "Epic" },
-                    { new Guid("87af4649-9dd4-414b-990f-211083cfa162"), "Green", new DateTime(2023, 10, 26, 22, 56, 24, 114, DateTimeKind.Utc).AddTicks(6620), false, null, "Skin11", 24.99m, "Epic" },
-                    { new Guid("bd6b1eef-4c5e-4672-852c-394e6849c518"), "White", new DateTime(2023, 10, 26, 22, 56, 24, 114, DateTimeKind.Utc).AddTicks(6610), true, null, "Skin10", 19.99m, "Rare" },
-                    { new Guid("d87ad62e-ca2c-49e0-9168-a07b84f59593"), "Green", new DateTime(2023, 10, 26, 22, 56, 24, 114, DateTimeKind.Utc).AddTicks(6570), true, null, "Skin2", 9.99m, "Normal" }
+                    { new Guid("0e238b35-a0ce-4760-ac73-a41f9b07ab59"), "Green", new DateTime(2023, 10, 27, 8, 4, 56, 441, DateTimeKind.Utc).AddTicks(7730), false, null, "Skin11", 24.99m, "Epic" },
+                    { new Guid("241a1ca9-f26e-40f6-8ff7-5c039dc07874"), "Orange", new DateTime(2023, 10, 27, 8, 4, 56, 441, DateTimeKind.Utc).AddTicks(7720), true, null, "Skin8", 14.99m, "Legendary" },
+                    { new Guid("49e7fdf6-90bf-41fb-9bb2-3d8cfb0f9f5e"), "Red", new DateTime(2023, 10, 27, 8, 4, 56, 441, DateTimeKind.Utc).AddTicks(7720), true, null, "Skin7", 17.99m, "Epic" },
+                    { new Guid("5994e1d8-d643-4eb1-8f51-8bf1caa3edca"), "Purple", new DateTime(2023, 10, 27, 8, 4, 56, 441, DateTimeKind.Utc).AddTicks(7700), true, null, "Skin3", 15.99m, "Epic" },
+                    { new Guid("6f8d1cf3-8538-4ae9-9264-a9f5af66fe88"), "Blue", new DateTime(2023, 10, 27, 8, 4, 56, 441, DateTimeKind.Utc).AddTicks(7710), true, null, "Skin5", 24.99m, "Normal" },
+                    { new Guid("93d79334-fcae-4344-9b61-68a5f60bc737"), "Brown", new DateTime(2023, 10, 27, 8, 4, 56, 441, DateTimeKind.Utc).AddTicks(7710), false, null, "Skin6", 12.99m, "Rare" },
+                    { new Guid("ca99ed0c-9c71-47c5-8d28-1e26456553dd"), "Pink", new DateTime(2023, 10, 27, 8, 4, 56, 441, DateTimeKind.Utc).AddTicks(7700), true, null, "Skin4", 29.99m, "Legendary" },
+                    { new Guid("d3cc6d9f-1bbb-4b22-b1ed-93bbb4b74f64"), "Green", new DateTime(2023, 10, 27, 8, 4, 56, 441, DateTimeKind.Utc).AddTicks(7690), true, null, "Skin2", 9.99m, "Normal" },
+                    { new Guid("d7e90c6c-c9f4-481c-8f1e-b634b1069594"), "Yellow", new DateTime(2023, 10, 27, 8, 4, 56, 441, DateTimeKind.Utc).AddTicks(7720), false, null, "Skin9", 22.99m, "Normal" },
+                    { new Guid("e477e5f3-ddfa-4213-92b8-21a191632810"), "White", new DateTime(2023, 10, 27, 8, 4, 56, 441, DateTimeKind.Utc).AddTicks(7730), true, null, "Skin10", 19.99m, "Rare" },
+                    { new Guid("fe295ef3-7e62-4c0a-aa93-70610a940162"), "Yellow", new DateTime(2023, 10, 27, 8, 4, 56, 441, DateTimeKind.Utc).AddTicks(7690), false, null, "Skin1", 19.99m, "Rare" }
                 });
 
             migrationBuilder.CreateIndex(
