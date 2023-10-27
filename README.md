@@ -6,7 +6,7 @@ The project is built using .NET Core, and uses a modular architecture with each 
 
 It has been designed to be easily extensible and maintainable, with a focus on separation of concerns and testability. The project includes unit tests for the `Skins` module, which demonstrate how to test the various components of the module using the DDD approach.
 
-Overall, `OpenSkinsApi` is a demonstration of how to build a modern, scalable, and maintainable projects using the latest technologies and best practices.
+Overall, `OpenSkinsApi` is a demonstration of how to build a modern, scalable, and maintainable project using the latest technologies and best practices.
 
 ## Architecture
 
