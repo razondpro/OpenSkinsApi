@@ -12,6 +12,7 @@ namespace OpenSkinsApi.Config.Http
         public void Install(IServiceCollection services, IConfiguration configuration)
         {
             services.AddHttpContextAccessor();
+            services.AddCors();
             services.AddScoped<FindAvailableSkinsController>();
             services.AddScoped<FindSkinByIdController>();
             services.AddScoped<PurchaseSkinController>();

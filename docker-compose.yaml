@@ -1,9 +1,51 @@
 version: "3.8"
 
 services:
-  mysql:
+  mysqldb:
     image: mysql:8.0
+    container_name: mysqldb-container
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
     environment:
       MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: skins
     ports:
       - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - openapi_network
+
+  skins-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5108:80"
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    container_name: skins-app-container
+    environment:
+      MYSQL_HOST: mysqldb
+      MYSQL_PORT: "3306"
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root_password
+      MYSQL_DATABASE: skins
+      MYSQL_MAX_RETRY_COUNT: "3"
+      MYSQL_COMMAND_TIMEOUT: "30"
+      MYSQL_ENABLE_DETAILED_ERRORS: "true"
+      MYSQL_ENABLE_SENSITIVE_DATA_LOGGING: "false"
+      ASPNETCORE_ENVIRONMENT: Development
+    networks:
+      - openapi_network
+
+volumes:
+  mysql_data:
+
+networks:
+  openapi_network:

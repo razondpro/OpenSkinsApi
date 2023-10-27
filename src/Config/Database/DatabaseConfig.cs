@@ -33,6 +33,21 @@ namespace OpenSkinsApi.Config.Database
 
             });
 
+            services.AddSingleton<UpdateAuditableEntitiesInterceptor>();
+
+            // Create a new service scope to perform the database migration
+            using (var scope = services.BuildServiceProvider().CreateScope())
+            {
+                var serviceProvider = scope.ServiceProvider;
+                var dbContext = serviceProvider.GetRequiredService<OpenSkinsApi.Infrastructure.Persistence.Database>();
+
+                if (dbContext.Database.GetPendingMigrations().Any())
+                {
+                    dbContext.Database.Migrate();
+                }
+            }
+
+
             return services;
         }
     }
