@@ -61,6 +61,23 @@ This command will start the MySQL container and the skins-app container, which c
 ```bash
 http://localhost:5108/swagger
 ```
+Note: There is a file called `skins.json` in the root directory of the project, which contains a collection of skins
+that we use to seed the database. The project already includes a migration that seeds the database with these skins which can be found in the following folder `src.Shared.Infrastructure.Persistence.Migrations`.
+
+If you want to add more skins to the database, you can add them to the `skins.json` file. Be careful adding the data to the file, as it is easy to make mistakes when editing JSON files. If you make a mistake, the migration will fail and the application will run without any available skins data. Also you need to have `dotnet-ef` installed on your machine and make sure that the database is already running. Then you can run the following command to create a new migration:
+
+```bash
+dotnet ef migrations add <migration-name> -o src/Shared/Infrastructure/Persistence/Migrations
+```
+
+After running the migration command, you can run the following docker command to build and run the application:
+
+```bash
+docker compose up -d --build
+```
+---
+
+##Routes
 
 The project defines the following routes:
 
