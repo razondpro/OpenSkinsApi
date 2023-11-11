@@ -1,6 +1,7 @@
 using MediatR;
 namespace OpenSkinsApi.Infrastructure.Persistence.Core.UnitOfWork.Behaviors
 {
+    using OpenSkinsApi.Infrastructure.Persistence.Core.UnitOfWork;
     public class UnitOfWorkBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : notnull
     {

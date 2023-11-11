@@ -1,6 +1,6 @@
 using OpenSkinsApi.Domain;
 
-namespace UserService.Shared.Domain.Events
+namespace OpenSkinsApi.Domain.Events
 {
     public record DomainEvent(
         UniqueIdentity Id,

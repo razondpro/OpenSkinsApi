@@ -1,4 +1,4 @@
-namespace UserService.Shared.Domain.Events
+namespace OpenSkinsApi.Domain.Events
 {
     using MediatR;
     using OpenSkinsApi.Domain;
