@@ -1,0 +1,27 @@
+{
+    "doc": "UserCreated event schema v1",
+    "name": "UserCreated",
+    "namespace": "OpenSkinsApi.Infrastructure.Bus.Kafka.Events.Schemas.Auth.UserCreated",
+    "type": "record",
+    "fields": [
+      {
+        "name": "UserId",
+        "type": "string"
+      },
+      {
+        "name": "UserName",
+        "type": "string"
+      },
+      {
+        "name": "FirstName",
+        "type": "string"
+      },
+      {
+        "name": "LastName",
+        "type": [
+          "null",
+          "string"
+        ]
+      }
+    ]
+  }

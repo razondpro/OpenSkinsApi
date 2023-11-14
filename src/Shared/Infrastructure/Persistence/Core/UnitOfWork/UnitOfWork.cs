@@ -5,25 +5,22 @@ namespace OpenSkinsApi.Infrastructure.Persistence.Core.UnitOfWork
     using OpenSkinsApi.Infrastructure.Persistence;
     using OpenSkinsApi.Infrastructure.Persistence.Core.Outbox;
 
-    public class UnitOfWork : IUnitOfWork
+    public abstract class UnitOfWork<TContext> : IUnitOfWork where TContext : Database
     {
-
-        private readonly Database DbContext;
-
-        public UnitOfWork(Database database)
+        private readonly TContext _dbContext;
+        public UnitOfWork(TContext database)
         {
-            DbContext = database;
+            _dbContext = database;
         }
-        public async Task CommitAsync(CancellationToken cancellationToken = default)
+        public virtual async Task CommitAsync(CancellationToken cancellationToken = default)
         {
             ConvertDomainEventsToOutboxMessage();
-            await DbContext.SaveChangesAsync(cancellationToken);
+            await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
         private void ConvertDomainEventsToOutboxMessage()
         {
-
-            var outboxMessages = DbContext.ChangeTracker
+            var outboxMessages = _dbContext.ChangeTracker
                 .Entries<AggregateRoot>()
                 .Select(x => x.Entity)
                 .SelectMany(x =>
@@ -41,7 +38,7 @@ namespace OpenSkinsApi.Infrastructure.Persistence.Core.UnitOfWork
                     })))
                 .ToList();
 
-            DbContext.OutboxMessages.AddRange(outboxMessages);
+            _dbContext.OutboxMessages.AddRange(outboxMessages);
         }
     }
 }

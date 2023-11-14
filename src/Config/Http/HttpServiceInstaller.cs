@@ -4,7 +4,9 @@ using OpenSkinsApi.Modules.Skins.Application.DeletePurchase;
 using OpenSkinsApi.Modules.Skins.Application.FindAvailableSkins;
 using OpenSkinsApi.Modules.Skins.Application.FindSkinById;
 using OpenSkinsApi.Modules.Skins.Application.FindMySkins;
-
+using OpenSkinsApi.Modules.Auth.Application.RegisterUser;
+using OpenSkinsApi.Modules.Auth.Application.LoginUser;
+using OpenSkinsApi.Modules.Auth.Application.RefreshToken;
 namespace OpenSkinsApi.Config.Http
 {
     public class HttpServiceInstaller : IServiceInstaller
@@ -13,12 +15,6 @@ namespace OpenSkinsApi.Config.Http
         {
             services.AddHttpContextAccessor();
             services.AddCors();
-            services.AddScoped<FindAvailableSkinsController>();
-            services.AddScoped<FindSkinByIdController>();
-            services.AddScoped<PurchaseSkinController>();
-            services.AddScoped<DeletePurchaseController>();
-            services.AddScoped<ChangePurchasedColorController>();
-            services.AddScoped<FindMySkinsController>();
         }
     }
 }

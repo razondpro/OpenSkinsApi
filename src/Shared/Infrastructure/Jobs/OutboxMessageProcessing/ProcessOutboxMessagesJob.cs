@@ -1,4 +1,4 @@
-namespace UserService.Shared.Infrastructure.Jobs.OutboxMessageProcessing
+namespace OpenSkinsApi.Infrastructure.Jobs.OutboxMessageProcessing
 {
     using MediatR;
     using Microsoft.EntityFrameworkCore;
@@ -8,6 +8,7 @@ namespace UserService.Shared.Infrastructure.Jobs.OutboxMessageProcessing
     using Quartz;
     using OpenSkinsApi.Domain.Events;
     using OpenSkinsApi.Infrastructure.Persistence;
+    using Serilog;
 
     [DisallowConcurrentExecution]
     public class ProcessOutboxMessagesJob : IJob
@@ -47,7 +48,7 @@ namespace UserService.Shared.Infrastructure.Jobs.OutboxMessageProcessing
                         .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
                             (exception, timeSpan, retryCount, context) =>
                             {
-                                // Log.Error(exception.Message);
+                                Log.Error(exception.Message);
                             });
 
                     PolicyResult policyResult = await policy.ExecuteAndCaptureAsync(async () =>
@@ -63,7 +64,7 @@ namespace UserService.Shared.Infrastructure.Jobs.OutboxMessageProcessing
                 }
                 catch (Exception exception)
                 {
-                    // Log.Error(exception.Message);
+                    Log.Error(exception.Message);
                     message.Error = exception.ToString();
                 }
                 finally

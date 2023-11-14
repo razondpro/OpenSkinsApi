@@ -1,6 +1,5 @@
 using OpenSkinsApi.Domain;
 using OpenSkinsApi.Modules.Skins.Domain.Enums;
-using OpenSkinsApi.Shared.Domain;
 
 namespace OpenSkinsApi.Modules.Skins.Domain.Entities
 {

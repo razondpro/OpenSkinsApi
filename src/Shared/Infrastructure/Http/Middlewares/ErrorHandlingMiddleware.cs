@@ -7,6 +7,7 @@ namespace OpenSkinsApi.Infrastructure.Http.Middlewares
     using Microsoft.AspNetCore.Diagnostics;
     using Microsoft.AspNetCore.Http;
     using OpenSkinsApi.Infrastructure.Http.Core;
+    using Serilog;
 
     public static class ErrorHandlingMiddlewareExtensions
     {
@@ -37,6 +38,8 @@ namespace OpenSkinsApi.Infrastructure.Http.Middlewares
                         ApiHttpResponse response = new("Internal Server Error", (int)HttpStatusCode.InternalServerError);
 
                         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+                        Log.Error(exception, "An error occurred while processing the request");
 
                         await context.Response.WriteAsJsonAsync(response);
                     }

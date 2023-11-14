@@ -42,6 +42,7 @@ namespace OpenSkinsApi.Modules.Skins.Infrastructure.Http.Routes
             {
                 return await controller.Execute(dto, cancellationToken);
             })
+            .RequireAuthorization()
             .AddEndpointFilter<ValidationFilter<PurchaseSkinRequestDto>>()
             .WithName("PurchaseSkin")
             .WithDescription("Purchase a new skin")
@@ -64,6 +65,7 @@ namespace OpenSkinsApi.Modules.Skins.Infrastructure.Http.Routes
             {
                 return await controller.Execute(dto, cancellationToken);
             })
+            .RequireAuthorization()
             .AddEndpointFilter<ValidationFilter<ChangePurchasedColorRequestDto>>()
             .WithName("ChangePurchasedColor")
             .WithDescription("Change aquired skin color")
@@ -76,6 +78,7 @@ namespace OpenSkinsApi.Modules.Skins.Infrastructure.Http.Routes
             {
                 return await controller.Execute(dto, cancellationToken);
             })
+            .RequireAuthorization()
             .AddEndpointFilter<ValidationFilter<DeletePurchaseRequestDto>>()
             .WithName("DeletePurchase")
             .WithDescription("Delete purchase")

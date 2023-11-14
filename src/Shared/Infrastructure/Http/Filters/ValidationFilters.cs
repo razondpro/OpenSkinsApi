@@ -1,5 +1,6 @@
 using FluentValidation;
 using FluentValidation.Results;
+using Serilog;
 
 namespace OpenSkinsApi.Infrastructure.Http.Filters
 {
@@ -25,6 +26,7 @@ namespace OpenSkinsApi.Infrastructure.Http.Filters
                 }
                 else
                 {
+                    Log.Error($"Error ocurred while validating request for {nameof(ValidationFilter<T>)}: Entity is null");
                     throw new ValidationException("Unkonwn error ocurred");
                 }
             }

@@ -1,8 +1,11 @@
 using LanguageExt;
 using OpenSkinsApi.Application.Commands;
 using OpenSkinsApi.Domain;
+using OpenSkinsApi.Infrastructure.Persistence.Core.UnitOfWork;
+using OpenSkinsApi.Modules.Skins.Application.Abstractions;
 using OpenSkinsApi.Modules.Skins.Domain.Repositories;
 using OpenSkinsApi.Modules.Skins.Domain.ValueObjects;
+using OpenSkinsApi.Modules.Skins.Infrastructure.Persistence;
 
 namespace OpenSkinsApi.Modules.Skins.Application.PurchaseSkin
 {
@@ -11,15 +14,18 @@ namespace OpenSkinsApi.Modules.Skins.Application.PurchaseSkin
         private readonly ISkinReadRepository _skinReadRepository;
         private readonly ISkinWriteRepository _skinWriteRepository;
         private readonly IOwnerReadRepository _ownerReadRepository;
+        private readonly ISkinUnitOfWork _unitOfWork;
 
         public PurchaseSkinCommandHandler(
             ISkinReadRepository skinReadRepository,
             ISkinWriteRepository skinWriteRepository,
-            IOwnerReadRepository ownerReadRepository)
+            IOwnerReadRepository ownerReadRepository,
+            ISkinUnitOfWork unitOfWork)
         {
             _skinReadRepository = skinReadRepository;
             _skinWriteRepository = skinWriteRepository;
             _ownerReadRepository = ownerReadRepository;
+            _unitOfWork = unitOfWork;
         }
         public async Task<Either<Exception, Unit>> Handle(PurchaseSkinCommand request, CancellationToken cancellationToken)
         {
@@ -46,6 +52,7 @@ namespace OpenSkinsApi.Modules.Skins.Application.PurchaseSkin
 
             skin.Buy(owner);
             await _skinWriteRepository.Update(skin);
+            await _unitOfWork.CommitAsync(cancellationToken);
 
             return Unit.Default;
         }

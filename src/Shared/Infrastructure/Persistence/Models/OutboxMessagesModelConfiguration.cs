@@ -1,4 +1,4 @@
-namespace UserService.Shared.Infrastructure.Persistence.Moddels
+namespace OpenSkinsApi.Infrastructure.Persistence.Moddels
 {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;

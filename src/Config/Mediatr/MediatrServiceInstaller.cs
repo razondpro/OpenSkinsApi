@@ -2,7 +2,7 @@ namespace OpenSkinsApi.Config.Mediatr
 {
     using MediatR;
     using Microsoft.Extensions.DependencyInjection;
-    using OpenSkinsApi.Infrastructure.Persistence.Core.UnitOfWork.Behaviors;
+    using OpenSkinsApi.Infrastructure.Idempotence;
 
     public class MediatrServiceInstaller : IServiceInstaller
     {
@@ -11,8 +11,9 @@ namespace OpenSkinsApi.Config.Mediatr
             services.AddMediatR(cfg =>
                 {
                     cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
-                    cfg.AddOpenBehavior(typeof(UnitOfWorkBehavior<,>));
                 });
+
+            services.Decorate(typeof(INotificationHandler<>), typeof(IdempotentDomainEventHandler<>));
         }
     }
 }

@@ -1,5 +1,6 @@
 using OpenSkinsApi.Infrastructure.Http.Middlewares;
 using OpenSkinsApi.Infrastructure.Http.Api;
+using Serilog;
 
 namespace OpenSkinsApi.Infrastructure.Http
 {
@@ -24,14 +25,16 @@ namespace OpenSkinsApi.Infrastructure.Http
         {
             //request body validation middleware (we only accept valid json)
             _app.UseMiddleware<JsonValidationMiddleware>();
-            //injecting a claim for the email address of the user in every request
-            _app.UseMiddleware<EmailClaimMiddleware>();
 
             if (_app.Environment.IsDevelopment())
             {
+                _app.UseSerilogRequestLogging();
                 _app.UseDeveloperExceptionPage();
                 _app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             }
+
+            _app.UseAuthentication();
+            _app.UseAuthorization();
         }
 
         private void ConfigureGlobalErrorHandling()
@@ -61,12 +64,14 @@ namespace OpenSkinsApi.Infrastructure.Http
 
         private void ConfigureRoutes()
         {
+            Log.Information("Starting server");
             _app.NewVersionedApi()
                 .BuildRoutes();
         }
 
         public async Task RunAsync()
         {
+            Log.Information("Stopping server");
             await _app.RunAsync();
         }
 

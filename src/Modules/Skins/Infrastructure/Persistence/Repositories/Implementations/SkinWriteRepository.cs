@@ -6,9 +6,8 @@ namespace OpenSkinsApi.Modules.Skins.Infrastructure.Persistence.Repositories.Imp
 {
     public class SkinWriteRepository : ISkinWriteRepository
     {
-        private readonly Database _context;
-
-        public SkinWriteRepository(Database context)
+        private readonly SkinDatabase _context;
+        public SkinWriteRepository(SkinDatabase context)
         {
             _context = context;
         }

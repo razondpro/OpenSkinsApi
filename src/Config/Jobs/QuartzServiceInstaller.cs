@@ -1,8 +1,8 @@
-namespace UserService.Config.Jobs
+namespace OpenSkinsApi.Config.Jobs
 {
     using OpenSkinsApi.Config;
     using Quartz;
-    using UserService.Shared.Infrastructure.Jobs.OutboxMessageProcessing;
+    using OpenSkinsApi.Infrastructure.Jobs.OutboxMessageProcessing;
 
     public class QuartzServiceInstaller : IServiceInstaller
     {

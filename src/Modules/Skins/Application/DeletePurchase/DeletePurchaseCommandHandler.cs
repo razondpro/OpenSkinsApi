@@ -1,8 +1,11 @@
 using LanguageExt;
 using OpenSkinsApi.Application.Commands;
 using OpenSkinsApi.Domain;
+using OpenSkinsApi.Infrastructure.Persistence.Core.UnitOfWork;
+using OpenSkinsApi.Modules.Skins.Application.Abstractions;
 using OpenSkinsApi.Modules.Skins.Domain.Repositories;
 using OpenSkinsApi.Modules.Skins.Domain.ValueObjects;
+using OpenSkinsApi.Modules.Skins.Infrastructure.Persistence;
 
 namespace OpenSkinsApi.Modules.Skins.Application.DeletePurchase
 {
@@ -10,10 +13,14 @@ namespace OpenSkinsApi.Modules.Skins.Application.DeletePurchase
         ICommandHandler<DeleteOwnedSkinCommand, Either<Exception, Unit>>
     {
         private readonly IPurchaseReadRepository _purchaseReadRepository;
+        private readonly ISkinUnitOfWork _unitOfWork;
 
-        public DeleteOwnedSkinCommandHandler(IPurchaseReadRepository purchaseReadRepository)
+        public DeleteOwnedSkinCommandHandler(
+            IPurchaseReadRepository purchaseReadRepository,
+            ISkinUnitOfWork unitOfWork)
         {
             _purchaseReadRepository = purchaseReadRepository;
+            _unitOfWork = unitOfWork;
         }
         public async Task<Either<Exception, Unit>> Handle(DeleteOwnedSkinCommand request, CancellationToken cancellationToken)
         {
@@ -28,6 +35,8 @@ namespace OpenSkinsApi.Modules.Skins.Application.DeletePurchase
             }
 
             purchase.SoftDelete();
+
+            await _unitOfWork.CommitAsync(cancellationToken);
 
             return Unit.Default;
         }

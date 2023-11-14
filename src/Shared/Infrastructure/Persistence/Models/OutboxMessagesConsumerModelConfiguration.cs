@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OpenSkinsApi.Infrastructure.Persistence.Core.Outbox;
 
-namespace UserService.Shared.Infrastructure.Persistence.Models
+namespace OpenSkinsApi.Infrastructure.Persistence.Models
 {
     public class OutboxMessagesConsumerModelConfiguration : IEntityTypeConfiguration<OutboxMessageConsumer>
     {

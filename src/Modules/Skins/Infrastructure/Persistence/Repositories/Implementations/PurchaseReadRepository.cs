@@ -8,9 +8,9 @@ namespace OpenSkinsApi.Modules.Skins.Infrastructure.Persistence.Repositories.Imp
 {
     public class PurchaseReadRepository : IPurchaseReadRepository
     {
-        private readonly Database _database;
+        private readonly SkinDatabase _database;
 
-        public PurchaseReadRepository(Database database)
+        public PurchaseReadRepository(SkinDatabase database)
         {
             _database = database;
         }

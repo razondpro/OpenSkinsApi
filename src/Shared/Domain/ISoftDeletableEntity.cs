@@ -1,4 +1,4 @@
-namespace OpenSkinsApi.Shared.Domain
+namespace OpenSkinsApi.Domain
 {
     public interface ISoftDeletableEntity
     {

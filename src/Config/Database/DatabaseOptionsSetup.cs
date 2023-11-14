@@ -26,12 +26,6 @@ namespace OpenSkinsApi.Config.Database
             var password = _configuration["MYSQL_PASSWORD"] ?? "root_password";
 
             options.ConnectionString = $"Server={host};Port={port};Database={database};Uid={username};Pwd={password};";
-
-            var env = _configuration["ASPNETCORE_ENVIRONMENT"];
-
-            Console.WriteLine($"[DatabaseOptionsSetup] Environment: {env}");
-
-
         }
     }
 }
